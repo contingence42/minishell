@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/30 09:59:10 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:09:44 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_lexer
 	char			*content;
 	size_t			index;
 	t_lextype		type;
+	struct s_lexer	*before;
 	struct s_lexer	*next;
 }	t_lexer;
 
@@ -64,5 +65,12 @@ typedef struct s_minishell
 	t_command	*command;
 	int			saved_stdin;
 }	t_minishell;
+
+t_lexer	*lex_new(char *content);
+t_lexer	*lex_geti(t_lexer *list, size_t index);
+t_lexer	*lex_last(t_lexer *list);
+void	lex_clear(t_lexer **list);
+void	lex_add_before(t_lexer *list, t_lexer *node);
+void	lex_add_after(t_lexer *list, t_lexer *node);
 
 #endif
