@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aattali <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/01/17 16:15:18 by aattali          ###   ########.fr        #
+#    Updated: 2024/01/30 10:19:30 by kdaumont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@
 #* *                            GENERAL INFO                                * *#
 #* ************************************************************************** *#
 
-TARGET := template
+TARGET := minishell
 
 #* ************************************************************************** *#
 #* *                             COMPILATION                                * *#
 #* ************************************************************************** *#
 
-CC := cc
+CC := clang
 CFLAGS += -Wall -Werror -Wextra
 LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm
 
@@ -82,25 +82,25 @@ DEPENDENCIES := $(OBJECTS:.o=.d)
 #* ************************************************************************** *#
 
 ifeq (noflag, $(filter noflag,$(MAKECMDGOALS)))
-	CC_FLAGS += -Wall -Wextra
+	CFLAGS += -Wall -Wextra
 else
-	CC_FLAGS += -Wall -Wextra -Werror
+	CFLAGS += -Wall -Wextra -Werror
 endif
 
 ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
-	CC_FLAGS += -g3
+	CFLAGS += -g3
 endif
 
 ifeq (sanadd, $(filter sanadd,$(MAKECMDGOALS)))
-	CC_FLAGS += -fsanitize=address -g3
+	CFLAGS += -fsanitize=address -g3
 endif
 
 ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
-	CC_FLAGS += -fsanitize=thread -g3
+	CFLAGS += -fsanitize=thread -g3
 endif
 
 ifeq (optimize, $(filter optimize,$(MAKECMDGOALS)))
-	CC_FLAGS += -O3
+	CFLAGS += -O3
 endif
 
 #* ************************************************************************** *#
@@ -223,6 +223,9 @@ gmk:
 	if [ -d make ];then echo ok;else mkdir make;fi
 	@find -name '*.c' -printf "%d%p\n" | sort -n | grep -v libft | grep -v mlx | sed 's/^[[:digit:]]/SOURCES += /' > make/sources.mk
 
+norm:
+	@norminette $(LIBFT_DIR)
+	@norminette $(SRCDIR) $(INCLUDES)
 # --------------------- #
 #      Recompile.       #
 # --------------------- #
@@ -243,4 +246,4 @@ sanadd: all
 
 santhread: all
 
-.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread
+.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread norm
