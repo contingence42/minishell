@@ -6,7 +6,7 @@
 #    By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/01/30 10:03:55 by kdaumont         ###   ########.fr        #
+#    Updated: 2024/01/30 10:19:30 by kdaumont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ TARGET := minishell
 #* *                             COMPILATION                                * *#
 #* ************************************************************************** *#
 
-CC := cc
+CC := clang
 CFLAGS += -Wall -Werror -Wextra
 LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm
 
@@ -223,6 +223,9 @@ gmk:
 	if [ -d make ];then echo ok;else mkdir make;fi
 	@find -name '*.c' -printf "%d%p\n" | sort -n | grep -v libft | grep -v mlx | sed 's/^[[:digit:]]/SOURCES += /' > make/sources.mk
 
+norm:
+	@norminette $(LIBFT_DIR)
+	@norminette $(SRCDIR) $(INCLUDES)
 # --------------------- #
 #      Recompile.       #
 # --------------------- #
@@ -243,4 +246,4 @@ sanadd: all
 
 santhread: all
 
-.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread
+.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread norm
