@@ -6,7 +6,7 @@
 #    By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/01/30 10:19:30 by kdaumont         ###   ########.fr        #
+#    Updated: 2024/01/31 09:11:23 by kdaumont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ TARGET := minishell
 #* ************************************************************************** *#
 
 CC := clang
-CFLAGS += -Wall -Werror -Wextra
-LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm
+CFLAGS += -Wall -Werror -Wextra 
+LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm -lreadline
 
 #* ************************************************************************** *#
 #* *                              INCLUDES                                  * *#
