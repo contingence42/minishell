@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:07:31 by aattali           #+#    #+#             */
-/*   Updated: 2024/01/30 13:07:38 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/01 09:13:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_lexer	*lex_last(t_lexer *list)
 {
 	if (list)
-		while (list)
+		while (list->next)
 			list = list->next;
 	return (list);
 }

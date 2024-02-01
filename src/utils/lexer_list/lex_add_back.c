@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lex_add_after.c                                    :+:      :+:    :+:   */
+/*   lex_add_back.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 13:08:15 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/01 08:53:19 by aattali          ###   ########.fr       */
+/*   Created: 2024/02/01 09:05:56 by aattali           #+#    #+#             */
+/*   Updated: 2024/02/01 09:09:43 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lex_add_after(t_lexer **list, t_lexer *node)
+void	lex_add_back(t_lexer **list, t_lexer *node)
 {
+	t_lexer	*last;
+
 	if (!node)
 		return ;
 	if (!*list)
@@ -21,7 +23,8 @@ void	lex_add_after(t_lexer **list, t_lexer *node)
 		*list = node;
 		return ;
 	}
-	node->next = (*list)->next;
-	node->before = *list;
-	(*list)->next = node;
+	last = lex_last(*list);
+	node->next = last->next;
+	node->before = last;
+	last->next = node;
 }

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/01/30 13:09:44 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/01 09:16:02 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <stdbool.h>
+# include <stdio.h>
 
 typedef enum e_lextype
 {
@@ -66,11 +67,13 @@ typedef struct s_minishell
 	int			saved_stdin;
 }	t_minishell;
 
-t_lexer	*lex_new(char *content);
+t_lexer	*lex_new(char *content, t_lextype type);
 t_lexer	*lex_geti(t_lexer *list, size_t index);
 t_lexer	*lex_last(t_lexer *list);
+t_lexer	*handle_quotes(char *line);
 void	lex_clear(t_lexer **list);
+void	lex_add_back(t_lexer **list, t_lexer *node);
 void	lex_add_before(t_lexer *list, t_lexer *node);
-void	lex_add_after(t_lexer *list, t_lexer *node);
+void	lex_add_after(t_lexer **list, t_lexer *node);
 
 #endif
