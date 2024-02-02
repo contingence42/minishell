@@ -6,50 +6,11 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:16:42 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/02 11:24:42 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/02 14:35:36 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/**
- * @brief find separators and get the pos of the second member
- *
- * Check if the first character of a string is a searched separator.
- * If the separator is paired, the function will obtain the position
- * of the second separator.
- * This function is called inside a loop for every chracter of a string.
- *
- * @param str the string given to search, generally offseted
- * @param seps the separators that are searched
- * @return the separator found and the position of the second member if paired
- */
-int	*get_sepend(char *str, char *seps)
-{
-	int		*result;
-	char	c;
-	size_t	i;
-
-	result = ft_calloc(2, sizeof(int));
-	if (!result)
-		return (NULL);
-	if (ft_inset(str[0], seps))
-	{
-		c = str[0];
-		if (c == '"' || c == '\'')
-		{
-			i = 1;
-			while (str[i] && str[i] != c)
-				i++;
-			if (!str[i])
-				result[1] = -1;
-			else
-				result[1] = i;
-		}
-		result[0] = c;
-	}
-	return (result);
-}
 
 /**
  * @brief transform a line into a linked list of revelant elements

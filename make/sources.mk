@@ -7,4 +7,5 @@ SOURCES += ./src/utils/lexer_list/lex_add_before.c
 SOURCES += ./src/utils/lexer_list/lex_clear.c
 SOURCES += ./src/utils/lexer_list/lex_geti.c
 SOURCES += ./src/utils/lexer_list/lex_last.c
+SOURCES += ./src/utils/lexer_list/lex_malloc_check.c
 SOURCES += ./src/utils/lexer_list/lex_new.c
