@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/01 09:16:02 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/02 11:16:00 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_lexer	*lex_new(char *content, t_lextype type);
 t_lexer	*lex_geti(t_lexer *list, size_t index);
 t_lexer	*lex_last(t_lexer *list);
 t_lexer	*handle_quotes(char *line);
+int		*get_sepend(char *str, char *seps);
 void	lex_clear(t_lexer **list);
 void	lex_add_back(t_lexer **list, t_lexer *node);
 void	lex_add_before(t_lexer *list, t_lexer *node);
