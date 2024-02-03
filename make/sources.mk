@@ -1,1 +1,11 @@
 SOURCES += ./src/main.c
+SOURCES += ./src/lexer/lexer.c
+SOURCES += ./src/lexer/quotes.c
+SOURCES += ./src/utils/lexer_list/lex_add_after.c
+SOURCES += ./src/utils/lexer_list/lex_add_back.c
+SOURCES += ./src/utils/lexer_list/lex_add_before.c
+SOURCES += ./src/utils/lexer_list/lex_clear.c
+SOURCES += ./src/utils/lexer_list/lex_geti.c
+SOURCES += ./src/utils/lexer_list/lex_last.c
+SOURCES += ./src/utils/lexer_list/lex_malloc_check.c
+SOURCES += ./src/utils/lexer_list/lex_new.c
