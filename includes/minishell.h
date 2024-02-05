@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/05 08:47:56 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/05 11:00:03 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include <fcntl.h>
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
+# define DEFAULT_PATH "/bin:/sbin:/usr/bin:/usr/sbin:\
+/usr/local/bin:/usr/local/sbin"
 # define MALLOC_ERROR "minishell: malloc error.\n"
 # define UNCLOSED_QUOTE_ERROR "minishell: unclosed quotes are forbidden.\n"
+# define HD_ERROR "minishell: warning: here-document delimited by end-of-file\
+(wanted `"
 
 typedef enum e_lextype
 {
@@ -35,14 +43,14 @@ typedef enum e_lextype
 	INFILE,
 	OUTFILE,
 	COMMAND
-}						t_lextype;
+}	t_lextype;
 
 typedef enum e_file
 {
 	EMPTY,
 	SINGLE,
 	DOUBLE
-}						t_file;
+}	t_file;
 
 typedef struct s_lexer
 {
@@ -64,13 +72,13 @@ typedef struct s_command
 	bool				pipe;
 	bool				builtin;
 	struct s_command	*next;
-}						t_command;
+}	t_command;
 
 typedef struct s_minishell
 {
-	t_command			*command;
-	int					saved_stdin;
-}						t_minishell;
+	t_command	*command;
+	int			saved_stdin;
+}	t_minishell;
 
 t_lexer	*lex_new(char *content, t_lextype type);
 t_lexer	*lex_geti(t_lexer *list, size_t index);
