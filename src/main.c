@@ -6,13 +6,13 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/02 09:56:18 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/05 08:51:56 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	show_prompt()
+void	show_prompt(void)
 {
 	char	*inpt;
 	int		i;
@@ -31,7 +31,7 @@ void	show_prompt()
 	}
 }
 
-int	main()
+int	main(void)
 {
 	show_prompt();
 	return (0);
