@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/06 14:01:11 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:02:06 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	show_prompt(void)
 			break ;
 		if (ft_strcmp(inpt, "history -c") == 0)
 			rl_clear_history();
-		if (ft_strlen(inpt) > 0)
+		if (inpt && inpt[0])
 			add_history(inpt);
 		printf("\n");
 		++i;
