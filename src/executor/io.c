@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   io.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/05 10:53:20 by aattali          ###   ########.fr       */
+/*   Created: 2024/02/06 12:46:50 by aattali           #+#    #+#             */
+/*   Updated: 2024/02/06 13:10:25 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	clean_exit(char *s, t_command *commands)
-{
-
-}
-
+/**
+ * @brief write the text heredoc'ed to the pipe
+ *
+ * @param eof the eof delimiter
+ * @param fd the write end of the pipe
+ */
 void	write_heredoc(char *eof, int fd)
 {
 	char	*line;
@@ -40,6 +41,14 @@ void	write_heredoc(char *eof, int fd)
 	free(line);
 }
 
+/**
+ * @brief safely open a file with error handling
+ *
+ * @param filename the name of the file
+ * @param flags the flags given to open
+ * @param commands linked-list of commands for error handling
+ * @return the fd opened
+ */
 int	safe_open(char *filename, int flags, t_command *commands)
 {
 	int	fd;
@@ -48,26 +57,4 @@ int	safe_open(char *filename, int flags, t_command *commands)
 	if (fd == -1)
 		clean_exit(filename, commands);
 	return (fd);
-}
-
-void	handle_heredoc(t_command *commands);
-void	handle_builtins(t_command *commands);
-void	handle_forking(t_command *commands);
-
-void	the_executor(t_minishell *minishell)
-{
-	t_command	*commands;
-
-	commands = minishell->command;
-	minishell->saved_stdin = dup(STDIN_FILENO);
-	while (commands)
-	{
-		if (commands->infile == HEREDOC)
-			handle_heredoc(commands);
-		if (commands->builtin)
-			handle_builtins(commands);
-		else
-			handle_forking(commands);
-		commands = commands->next;
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/05 11:00:03 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/06 12:49:20 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,33 @@ typedef struct s_command
 typedef struct s_minishell
 {
 	t_command	*command;
+	char		*limiter;
+	int			pipe[2];
+	int			heredoc[2];
 	int			saved_stdin;
 }	t_minishell;
 
-t_lexer	*lex_new(char *content, t_lextype type);
-t_lexer	*lex_geti(t_lexer *list, size_t index);
-t_lexer	*lex_last(t_lexer *list);
-t_lexer	*lexer(char *line);
-t_lexer	*handle_quotes(char *line);
 bool	lex_malloc_check(t_lexer *list);
 void	lex_clear(t_lexer **list);
 void	lex_add_back(t_lexer **list, t_lexer *node);
 void	lex_add_before(t_lexer *list, t_lexer *node);
 void	lex_add_after(t_lexer **list, t_lexer *node);
+t_lexer	*lex_new(char *content, t_lextype type);
+t_lexer	*lex_geti(t_lexer *list, size_t index);
+t_lexer	*lex_last(t_lexer *list);
+t_lexer	*lexer(char *line);
+t_lexer	*handle_quotes(char *line);
+
+int		safe_open(char *filename, int flags, t_command *commands);
+void	clean_exit(char *s, t_command *commands);
+void	write_heredoc(char *eof, int fd);
+
+void	ft_cd(t_command *commands);
+void	ft_echo(t_command *commands);
+void	ft_pwd(t_command *commands);
+void	ft_env(t_command *commands);
+void	ft_export(t_command *commands);
+void	ft_unset(t_command *commands);
+void	ft_exit(t_command *commands);
 
 #endif
