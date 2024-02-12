@@ -6,13 +6,11 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:28:17 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/12 13:22:27 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:22:39 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 /* Print the parameters, like 'echo' command
 @param cmd -> t_command struct pointer
