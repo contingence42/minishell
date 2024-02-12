@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/06 14:02:06 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:38:04 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	show_prompt(void)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	show_prompt();
 	return (0);

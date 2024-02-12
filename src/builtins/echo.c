@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:28:17 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/12 13:22:39 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/12 13:33:44 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	ft_echo(t_command *cmd)
 {
 	size_t	len;
-	int		i;
+	size_t	i;
 
 	len = ft_stralen(cmd->cmd);
 	if (len > 1 && ft_strncmp(cmd->cmd[1], "-", 1) != 0)
@@ -26,9 +26,9 @@ void	ft_echo(t_command *cmd)
 	else
 		i = 2;
 	if (len == 1)
-		return (printf("\n"), 1);
+		return ((void)printf("\n"));
 	if (len == 2 && ft_strncmp(cmd->cmd[1], "-", 1) == 0)
-		return (0);
+		return ;
 	while (cmd->cmd[i])
 	{
 		printf("%s", cmd->cmd[i]);
