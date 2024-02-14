@@ -3,16 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:15:52 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/06 13:19:57 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/12 15:01:50 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(t_command *commands)
+/* Print the current working directory, like pwd
+*/
+void	ft_pwd(void)
 {
-	(void)commands;
+	int		size;
+	char	*buffer;
+
+	size = 1;
+	buffer = NULL;
+	while (getcwd(buffer, size) == NULL)
+		size++;
+	buffer = malloc(sizeof(char) * (size - 1));
+	if (!buffer)
+		return ;
+	if (getcwd(buffer, size))
+		printf("%s\n", getcwd(buffer, size));
 }
