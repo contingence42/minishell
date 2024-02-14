@@ -6,14 +6,14 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:15:52 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/12 15:01:50 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:19:24 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Print the current working directory, like pwd
-*/
+ */
 void	ft_pwd(void)
 {
 	int		size;
@@ -28,4 +28,5 @@ void	ft_pwd(void)
 		return ;
 	if (getcwd(buffer, size))
 		printf("%s\n", getcwd(buffer, size));
+	free(buffer);
 }
