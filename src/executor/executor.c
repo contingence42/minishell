@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 10:03:13 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:49:50 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,8 @@ void	handle_forking(t_commands *command, t_minishell *minishell)
  *
  * @param minishell the general struct of the program
  */
-void	the_executor(t_minishell *minishell)
+void	the_executor(t_minishell *minishell, t_commands *command)
 {
-	t_commands	*command;
-
-	command = minishell->command;
 	minishell->saved_stdin = dup(STDIN_FILENO);
 	while (command)
 	{
@@ -123,4 +120,5 @@ void	the_executor(t_minishell *minishell)
 			handle_forking(command, minishell);
 		command = command->next;
 	}
+	wait_childs(minishell);
 }

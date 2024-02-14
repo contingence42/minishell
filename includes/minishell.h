@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/14 10:05:11 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:49:31 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ typedef struct s_commands
 typedef struct s_minishell
 {
 	pid_t		pid;
-	t_commands	*command;
 	t_file		infile;
 	t_file		outfile;
 	bool		ispipe;
 	char		**env;
+	char		**path;
 	char		*limiter;
 	char		*infn;
 	char		*outfn;
@@ -103,6 +103,7 @@ t_lexer	*handle_quotes(char *line);
 
 bool	isbroken_pipe(t_commands *command);
 int		safe_open(t_minishell *minishell, int flag);
+int		wait_childs(t_minishell *minishell);
 void	close_pipe(int pipe[2]);
 void	execute(t_commands *command, t_minishell *minishell);
 void	clean_exit(char *s, t_minishell *minishell, int code);

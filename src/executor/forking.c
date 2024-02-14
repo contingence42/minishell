@@ -6,11 +6,38 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 10:10:35 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 12:49:18 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/**
+ * @brief wait for all of the childs and return the latest error code
+ *
+ * TODO: adapt to minishell, is the errcode useful ?
+ *
+ * @param minishell the struct of the program
+ * @return the error code
+ */
+int	wait_childs(t_minishell *minishell)
+{
+	int	wstatus;
+	int	code;
+
+	code = EXIT_FAILURE;
+	while (errno != ECHILD)
+	{
+		if (wait(&wstatus) == minishell->pid)
+		{
+			if (WIFEXITED(wstatus))
+				code = WEXITSTATUS(wstatus);
+			else
+				code = 128 + WTERMSIG(wstatus);
+		}
+	}
+	return (code);
+}
 
 /**
  * @brief open, close and dup the necessary fds, for pipe, stdin and stdout
@@ -49,15 +76,31 @@ void	setup_fd(t_commands *command, t_minishell *minishell)
 /**
  * @brief replace cmd_name with the full and correct path
  *
- * TODO: everything
- *
  * @param command the linked-list of commands
  * @param minishell the struct of the program
  */
-void	get_path(t_commands *command, t_minishell *minishell)
+int	get_path(t_commands *command, t_minishell *minishell)
 {
-	(void)command;
-	(void)minishell;
+	size_t	i;
+	char	*cmd;
+	char	*cmdpath;
+
+	cmd = command->cmd_name;
+	if (!cmd || !ft_strcmp(cmd, "."))
+		return (command->cmd_name = NULL, 0);
+	if (ft_strchr(cmd, '/'))
+		return (command->cmd_name = ft_strdup(cmd), (command->cmd_name != NULL) - 1);
+	i = -1;
+	while (minishell->path && minishell->path[++i])
+	{
+		cmdpath = ft_strjoin3(minishell->path[i], "/", cmd);
+		if (!cmdpath)
+			return (-1);
+		if (!access(cmdpath, F_OK | X_OK))
+			return (command->cmd_name = cmdpath, 0);
+		free(cmdpath);
+	}
+	return (0);
 }
 
 /**
@@ -69,7 +112,8 @@ void	get_path(t_commands *command, t_minishell *minishell)
 void	execute(t_commands *command, t_minishell *minishell)
 {
 	setup_fd(command, minishell);
-	get_path(command, minishell);
+	if (get_path(command, minishell) == -1)
+		clean_exit("minishell: mem error", minishell, 0);
 	if (!command->cmd_name)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: command not found %s\n",
