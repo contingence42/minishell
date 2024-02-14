@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:15:52 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/12 15:19:24 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/14 13:15:13 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 /* Print the current working directory, like pwd
  */
-void	ft_pwd(void)
+void	ft_pwd(t_commands *command)
 {
 	int		size;
 	char	*buffer;
 
+	(void)command;
 	size = 1;
 	buffer = NULL;
 	while (getcwd(buffer, size) == NULL)

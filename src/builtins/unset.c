@@ -6,13 +6,13 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:15:52 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/06 13:17:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:56:32 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset(t_command *commands)
+void	ft_unset(t_commands *command)
 {
-	(void)commands;
+	(void)command;
 }
