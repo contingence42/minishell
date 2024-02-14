@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 12:49:18 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 13:20:06 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ int	get_path(t_commands *command, t_minishell *minishell)
 	if (!cmd || !ft_strcmp(cmd, "."))
 		return (command->cmd_name = NULL, 0);
 	if (ft_strchr(cmd, '/'))
-		return (command->cmd_name = ft_strdup(cmd), (command->cmd_name != NULL) - 1);
+		return (command->cmd_name = ft_strdup(cmd),
+			(command->cmd_name != NULL) - 1);
 	i = -1;
 	while (minishell->path && minishell->path[++i])
 	{
