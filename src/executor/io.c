@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:46:50 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/06 13:10:25 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:03:55 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,31 @@ void	write_heredoc(char *eof, int fd)
 /**
  * @brief safely open a file with error handling
  *
- * @param filename the name of the file
- * @param flags the flags given to open
- * @param commands linked-list of commands for error handling
+ * @param minishell the struct of the exec
+ * @param flag 0 if infile, 1 if outfile
  * @return the fd opened
  */
-int	safe_open(char *filename, int flags, t_command *commands)
+int	safe_open(t_minishell *minishell, int flag)
 {
-	int	fd;
+	int		fd;
+	int		flags;
+	char	*filename;
 
+	if (!flag)
+	{
+		flags = O_RDONLY;
+		filename = minishell->infn;
+	}
+	else
+	{
+		if (minishell->outfile == SINGLE)
+			flags = O_WRONLY | O_CREAT | O_TRUNC;
+		else
+			flags = O_WRONLY | O_CREAT | O_APPEND;
+		filename = minishell->outfn;
+	}
 	fd = open(filename, flags, 0644);
 	if (fd == -1)
-		clean_exit(filename, commands);
+		clean_exit(filename, minishell, 0);
 	return (fd);
 }

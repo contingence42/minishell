@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/12 14:54:27 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/14 10:05:11 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,31 @@ typedef struct s_lexer
 	struct s_lexer	*next;
 }	t_lexer;
 
-typedef struct s_command
+typedef struct s_commands
 {
 	char				*cmd_name;
 	char				**cmd;
-	t_file				infile;
-	t_file				outfile;
-	int					infile_fd;
-	int					outfile_fd;
-	bool				pipe;
 	bool				builtin;
-	struct s_command	*next;
-}	t_command;
+	bool				first;
+	bool				last;
+	struct s_commands	*next;
+}	t_commands;
 
 typedef struct s_minishell
 {
-	t_command	*command;
+	pid_t		pid;
+	t_commands	*command;
+	t_file		infile;
+	t_file		outfile;
+	bool		ispipe;
+	char		**env;
 	char		*limiter;
+	char		*infn;
+	char		*outfn;
 	int			pipe[2];
 	int			heredoc[2];
+	int			infile_fd;
+	int			outfile_fd;
 	int			saved_stdin;
 }	t_minishell;
 
@@ -95,16 +101,19 @@ t_lexer	*lex_last(t_lexer *list);
 t_lexer	*lexer(char *line);
 t_lexer	*handle_quotes(char *line);
 
-int		safe_open(char *filename, int flags, t_command *commands);
-void	clean_exit(char *s, t_command *commands);
+bool	isbroken_pipe(t_commands *command);
+int		safe_open(t_minishell *minishell, int flag);
+void	close_pipe(int pipe[2]);
+void	execute(t_commands *command, t_minishell *minishell);
+void	clean_exit(char *s, t_minishell *minishell, int code);
 void	write_heredoc(char *eof, int fd);
 
-void	ft_cd(t_command *commands);
-void	ft_echo(t_command *commands);
-void	ft_pwd(void);
-void	ft_env(t_command *commands);
-void	ft_export(t_command *commands);
-void	ft_unset(t_command *commands);
-void	ft_exit(t_command *commands);
+void	ft_cd(t_commands *command);
+void	ft_echo(t_commands *command);
+void	ft_pwd(t_commands *command);
+void	ft_env(t_commands *command);
+void	ft_export(t_commands *command);
+void	ft_unset(t_commands *command);
+void	ft_exit(t_commands *command);
 
 #endif

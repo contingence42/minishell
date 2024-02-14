@@ -6,16 +6,16 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 09:28:17 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/12 13:33:44 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:55:53 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Print the parameters, like 'echo' command
-@param cmd -> t_command struct pointer
+@param cmd -> t_commands struct pointer
 */
-void	ft_echo(t_command *cmd)
+void	ft_echo(t_commands *cmd)
 {
 	size_t	len;
 	size_t	i;

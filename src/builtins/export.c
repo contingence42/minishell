@@ -6,13 +6,13 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 13:15:52 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/06 13:17:00 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:56:22 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_export(t_command *commands)
+void	ft_export(t_commands *command)
 {
-	(void)commands;
+	(void)command;
 }

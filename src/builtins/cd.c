@@ -6,16 +6,16 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 14:03:14 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/06 13:50:10 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/14 09:55:48 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /* Change the working directory by wanted path, like cd
-@param cmd -> t_command struct pointer
+@param cmd -> t_commands struct pointer
 */
-void	ft_cd(t_command *cmd)
+void	ft_cd(t_commands *cmd)
 {
 	if (ft_stralen(cmd->cmd) == 1)
 	{
