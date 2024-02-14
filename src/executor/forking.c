@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 10:04:59 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/14 10:10:35 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,26 @@ void	setup_fd(t_commands *command, t_minishell *minishell)
 		clean_exit("minishell: dup error", minishell, 0);
 }
 
+/**
+ * @brief replace cmd_name with the full and correct path
+ *
+ * TODO: everything
+ *
+ * @param command the linked-list of commands
+ * @param minishell the struct of the program
+ */
 void	get_path(t_commands *command, t_minishell *minishell)
 {
 	(void)command;
 	(void)minishell;
 }
 
+/**
+ * @brief execute the command via execve, handling errors and pipes
+ *
+ * @param command the linked-list of commands
+ * @param minishell the struct of the program
+ */
 void	execute(t_commands *command, t_minishell *minishell)
 {
 	setup_fd(command, minishell);
