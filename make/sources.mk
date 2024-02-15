@@ -9,6 +9,7 @@ SOURCES += ./src/builtins/unset.c
 SOURCES += ./src/executor/executor.c
 SOURCES += ./src/executor/forking.c
 SOURCES += ./src/executor/io.c
+SOURCES += ./src/executor/path.c
 SOURCES += ./src/executor/pipe_utils.c
 SOURCES += ./src/lexer/lexer.c
 SOURCES += ./src/lexer/quotes.c

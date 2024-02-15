@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 08:31:21 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:12:42 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	execute(t_commands *command, t_executor *executor)
 		clean_exit(command->cmd_name, executor, 127);
 	else
 	{
-		execve(command->cmd_name, command->cmd, executor->env);
+		execve(command->cmd_name, command->cmd, *(executor->env));
 		clean_exit(command->cmd_name, executor, 126);
 	}
 	clean_exit(NULL, executor, 127);

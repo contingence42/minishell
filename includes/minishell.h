@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 08:28:28 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:26:42 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_executor
 	t_file		infile;
 	t_file		outfile;
 	bool		ispipe;
-	char		**env;
+	char		***env;
 	char		**path;
 	char		*limiter;
 	char		*infn;
@@ -116,6 +116,7 @@ int		wait_childs(t_executor *executor);
 void	close_pipe(int pipe[2]);
 void	execute(t_commands *command, t_executor *executor);
 void	clean_exit(char *s, t_executor *executor, int code);
+void	find_path(t_executor *executor);
 void	write_heredoc(char *eof, int fd);
 
 void	ft_cd(t_commands *command);

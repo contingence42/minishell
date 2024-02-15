@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 08:32:03 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:26:52 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	handle_forking(t_commands *command, t_executor *executor)
 void	the_executor(t_executor *executor, t_commands *command)
 {
 	executor->saved_stdin = dup(STDIN_FILENO);
+	find_path(executor);
 	while (command)
 	{
 		if (command->first && executor->infile == DOUBLE && !command->builtin)
