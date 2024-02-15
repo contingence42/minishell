@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 09:26:42 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:50:05 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	write_heredoc(char *eof, int fd);
 void	ft_cd(t_commands *command);
 void	ft_echo(t_commands *command);
 void	ft_pwd(t_commands *command);
-void	ft_env(t_commands *command);
+void	ft_env(t_executor *executor);
 void	ft_export(t_commands *command);
 void	ft_unset(t_commands *command);
 void	ft_exit(t_commands *command);

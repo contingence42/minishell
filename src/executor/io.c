@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:46:50 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 08:22:49 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:56:52 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	write_heredoc(char *eof, int fd)
 /**
  * @brief safely open a file with error handling
  *
- * @param executor the struct of the exec
+ * @param executor the struct of the exec process
  * @param flag 0 if infile, 1 if outfile
  * @return the fd opened
  */

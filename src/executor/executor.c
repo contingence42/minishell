@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 09:26:52 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 09:52:05 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	handle_heredoc(t_executor *executor)
  *
  * @param command the linked-list of command
  */
-void	handle_builtins(t_commands *command)
+void	handle_builtins(t_executor *executor, t_commands *command)
 {
 	if (!ft_strcmp(command->cmd_name, "cd"))
 		ft_cd(command);
@@ -64,7 +64,7 @@ void	handle_builtins(t_commands *command)
 	else if (!ft_strcmp(command->cmd_name, "unset"))
 		ft_unset(command);
 	else if (!ft_strcmp(command->cmd_name, "env"))
-		ft_env(command);
+		ft_env(executor);
 	else if (!ft_strcmp(command->cmd_name, "exit"))
 		ft_exit(command);
 }
@@ -117,7 +117,7 @@ void	the_executor(t_executor *executor, t_commands *command)
 		if (command->first && executor->infile == DOUBLE && !command->builtin)
 			handle_heredoc(executor);
 		if (command->builtin)
-			handle_builtins(command);
+			handle_builtins(executor, command);
 		else
 			handle_forking(command, executor);
 		command = command->next;
