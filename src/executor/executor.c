@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 09:52:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 10:23:55 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	handle_builtins(t_executor *executor, t_commands *command)
 	else if (!ft_strcmp(command->cmd_name, "pwd"))
 		ft_pwd(command);
 	else if (!ft_strcmp(command->cmd_name, "export"))
-		ft_export(command);
+		ft_export(executor, command);
 	else if (!ft_strcmp(command->cmd_name, "unset"))
-		ft_unset(command);
+		ft_unset(executor, command);
 	else if (!ft_strcmp(command->cmd_name, "env"))
 		ft_env(executor);
 	else if (!ft_strcmp(command->cmd_name, "exit"))

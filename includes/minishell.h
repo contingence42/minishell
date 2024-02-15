@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 09:50:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 10:34:45 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_lexer	*handle_quotes(char *line);
 bool	isbroken_pipe(t_commands *command);
 int		safe_open(t_executor *executor, int flag);
 int		wait_childs(t_executor *executor);
+int		get_env_pos(char **env, char *key);
 void	close_pipe(int pipe[2]);
 void	execute(t_commands *command, t_executor *executor);
 void	clean_exit(char *s, t_executor *executor, int code);
@@ -123,8 +124,8 @@ void	ft_cd(t_commands *command);
 void	ft_echo(t_commands *command);
 void	ft_pwd(t_commands *command);
 void	ft_env(t_executor *executor);
-void	ft_export(t_commands *command);
-void	ft_unset(t_commands *command);
+void	ft_export(t_executor *executor, t_commands *command);
+void	ft_unset(t_executor *executor, t_commands *command);
 void	ft_exit(t_commands *command);
 
 #endif
