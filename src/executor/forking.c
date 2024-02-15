@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 13:20:06 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 08:31:21 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 /**
  * @brief wait for all of the childs and return the latest error code
  *
- * TODO: adapt to minishell, is the errcode useful ?
+ * TODO: adapt to executor, is the errcode useful ?
  *
- * @param minishell the struct of the program
+ * @param executor the struct of the program
  * @return the error code
  */
-int	wait_childs(t_minishell *minishell)
+int	wait_childs(t_executor *executor)
 {
 	int	wstatus;
 	int	code;
@@ -28,7 +28,7 @@ int	wait_childs(t_minishell *minishell)
 	code = EXIT_FAILURE;
 	while (errno != ECHILD)
 	{
-		if (wait(&wstatus) == minishell->pid)
+		if (wait(&wstatus) == executor->pid)
 		{
 			if (WIFEXITED(wstatus))
 				code = WEXITSTATUS(wstatus);
@@ -43,43 +43,43 @@ int	wait_childs(t_minishell *minishell)
  * @brief open, close and dup the necessary fds, for pipe, stdin and stdout
  *
  * @param command the linked list of command
- * @param minishell the struct of the program
+ * @param executor the struct of the exec process
  */
-void	setup_fd(t_commands *command, t_minishell *minishell)
+void	setup_fd(t_commands *command, t_executor *executor)
 {
 	bool	dup_failed;
 
 	dup_failed = false;
-	if (command->first && minishell->infile != EMPTY)
+	if (command->first && executor->infile != EMPTY)
 	{
-		if (minishell->infile == DOUBLE)
-			minishell->infile_fd = minishell->heredoc[0];
+		if (executor->infile == DOUBLE)
+			executor->infile_fd = executor->heredoc[0];
 		else
-			minishell->infile_fd = safe_open(minishell, 0);
-		dup_failed |= dup2(minishell->infile_fd, STDIN_FILENO) < 0;
-		close(minishell->infile_fd);
+			executor->infile_fd = safe_open(executor, 0);
+		dup_failed |= dup2(executor->infile_fd, STDIN_FILENO) < 0;
+		close(executor->infile_fd);
 	}
-	if (!command->last && minishell->ispipe)
-		dup_failed |= dup2(minishell->pipe[1], STDOUT_FILENO) < 0;
-	else if (minishell->outfile != EMPTY)
+	if (!command->last && executor->ispipe)
+		dup_failed |= dup2(executor->pipe[1], STDOUT_FILENO) < 0;
+	else if (executor->outfile != EMPTY)
 	{
-		minishell->outfile_fd = safe_open(minishell, 1);
-		dup_failed |= dup2(minishell->outfile_fd, STDOUT_FILENO) < 0;
-		close(minishell->outfile_fd);
+		executor->outfile_fd = safe_open(executor, 1);
+		dup_failed |= dup2(executor->outfile_fd, STDOUT_FILENO) < 0;
+		close(executor->outfile_fd);
 	}
-	if (minishell->ispipe)
-		close_pipe(minishell->pipe);
+	if (executor->ispipe)
+		close_pipe(executor->pipe);
 	if (dup_failed)
-		clean_exit("minishell: dup error", minishell, 0);
+		clean_exit(DUP_ERROR, executor, 0);
 }
 
 /**
  * @brief replace cmd_name with the full and correct path
  *
  * @param command the linked-list of commands
- * @param minishell the struct of the program
+ * @param executor the struct of the exec process
  */
-int	get_path(t_commands *command, t_minishell *minishell)
+int	get_path(t_commands *command, t_executor *executor)
 {
 	size_t	i;
 	char	*cmd;
@@ -92,9 +92,9 @@ int	get_path(t_commands *command, t_minishell *minishell)
 		return (command->cmd_name = ft_strdup(cmd),
 			(command->cmd_name != NULL) - 1);
 	i = -1;
-	while (minishell->path && minishell->path[++i])
+	while (executor->path && executor->path[++i])
 	{
-		cmdpath = ft_strjoin3(minishell->path[i], "/", cmd);
+		cmdpath = ft_strjoin3(executor->path[i], "/", cmd);
 		if (!cmdpath)
 			return (-1);
 		if (!access(cmdpath, F_OK | X_OK))
@@ -108,24 +108,24 @@ int	get_path(t_commands *command, t_minishell *minishell)
  * @brief execute the command via execve, handling errors and pipes
  *
  * @param command the linked-list of commands
- * @param minishell the struct of the program
+ * @param executor the struct of the exec process
  */
-void	execute(t_commands *command, t_minishell *minishell)
+void	execute(t_commands *command, t_executor *executor)
 {
-	setup_fd(command, minishell);
-	if (get_path(command, minishell) == -1)
-		clean_exit("minishell: mem error", minishell, 0);
+	setup_fd(command, executor);
+	if (get_path(command, executor) == -1)
+		clean_exit(MALLOC_ERROR, executor, 0);
 	if (!command->cmd_name)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: command not found %s\n",
+		ft_dprintf(STDERR_FILENO, CMD_NOT_FOUND,
 			command->cmd[0]);
 	}
 	else if (access(command->cmd_name, F_OK | X_OK) == -1 && errno == ENOENT)
-		clean_exit(command->cmd_name, minishell, 127);
+		clean_exit(command->cmd_name, executor, 127);
 	else
 	{
-		execve(command->cmd_name, command->cmd, minishell->env);
-		clean_exit(command->cmd_name, minishell, 126);
+		execve(command->cmd_name, command->cmd, executor->env);
+		clean_exit(command->cmd_name, executor, 126);
 	}
-	clean_exit(NULL, minishell, 127);
+	clean_exit(NULL, executor, 127);
 }

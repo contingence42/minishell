@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 12:49:50 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 08:32:03 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
  * @param command the linked-list
  * @param code the exit code
  */
-void	clean_exit(char *s, t_minishell *minishell, int code)
+void	clean_exit(char *s, t_executor *executor, int code)
 {
 	if (s)
 		perror(s);
-	(void)minishell;
+	(void)executor;
 	if (code)
 		exit(code);
 	exit(EXIT_FAILURE);
@@ -34,14 +34,14 @@ void	clean_exit(char *s, t_minishell *minishell, int code)
 /**
  * @brief handle the preparation of the heredoc pipe
  *
- * @param minishell the general struct
+ * @param executor the struct of the exec process
  */
-void	handle_heredoc(t_minishell *minishell)
+void	handle_heredoc(t_executor *executor)
 {
-	if (pipe(minishell->heredoc) == -1)
-		clean_exit("minishell: pipe error", minishell, 0);
-	write_heredoc(minishell->limiter, minishell->heredoc[1]);
-	close(minishell->heredoc[1]);
+	if (pipe(executor->heredoc) == -1)
+		clean_exit(PIPE_ERROR, executor, 0);
+	write_heredoc(executor->limiter, executor->heredoc[1]);
+	close(executor->heredoc[1]);
 }
 
 /**
@@ -75,28 +75,28 @@ void	handle_builtins(t_commands *command)
  * setup the pipe if necessary, then fork and execute
  *
  * @param command the linked-list of command
- * @param minishell the general struct
+ * @param executor the struct of the exec process
  */
-void	handle_forking(t_commands *command, t_minishell *minishell)
+void	handle_forking(t_commands *command, t_executor *executor)
 {
-	if (minishell->ispipe)
+	if (executor->ispipe)
 	{
-		if (pipe(minishell->pipe) == -1)
-			clean_exit("minishell: pipe error", minishell, 0);
+		if (pipe(executor->pipe) == -1)
+			clean_exit(PIPE_ERROR, executor, 0);
 	}
-	minishell->pid = fork();
-	if (minishell->pid == -1)
-		clean_exit("minishell: fork error", minishell, 0);
-	if (!minishell->pid)
-		execute(command, minishell);
-	if (minishell->ispipe)
+	executor->pid = fork();
+	if (executor->pid == -1)
+		clean_exit(FORK_ERROR, executor, 0);
+	if (!executor->pid)
+		execute(command, executor);
+	if (executor->ispipe)
 	{
 		if (!isbroken_pipe(command))
-			dup2(minishell->pipe[0], STDIN_FILENO);
-		close_pipe(minishell->pipe);
+			dup2(executor->pipe[0], STDIN_FILENO);
+		close_pipe(executor->pipe);
 	}
-	if (minishell->infile == DOUBLE && command->first)
-		close(minishell->heredoc[0]);
+	if (executor->infile == DOUBLE && command->first)
+		close(executor->heredoc[0]);
 }
 
 /**
@@ -105,20 +105,21 @@ void	handle_forking(t_commands *command, t_minishell *minishell)
  * TODO:evertyhing about the structs need to be clarified,
  * which variables will be in the linked-list, which will be in the struct, etc
  *
- * @param minishell the general struct of the program
+ * @param executor the struct of the exec process
+ * @param command the linked-list of commands
  */
-void	the_executor(t_minishell *minishell, t_commands *command)
+void	the_executor(t_executor *executor, t_commands *command)
 {
-	minishell->saved_stdin = dup(STDIN_FILENO);
+	executor->saved_stdin = dup(STDIN_FILENO);
 	while (command)
 	{
-		if (command->first && minishell->infile == DOUBLE && !command->builtin)
-			handle_heredoc(minishell);
+		if (command->first && executor->infile == DOUBLE && !command->builtin)
+			handle_heredoc(executor);
 		if (command->builtin)
 			handle_builtins(command);
 		else
-			handle_forking(command, minishell);
+			handle_forking(command, executor);
 		command = command->next;
 	}
-	wait_childs(minishell);
+	wait_childs(executor);
 }

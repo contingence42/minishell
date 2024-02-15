@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:23:38 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/14 10:18:00 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 08:32:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /**
  * @brief check if piping will be needed, and toggle the flag
  *
- * @param minishell the struct of the program
+ * @param executor the struct of the exec process
  * @param command the linked-list of commands
  */
-void	pipe_needed(t_minishell *minishell, t_commands *command)
+void	pipe_needed(t_executor *executor, t_commands *command)
 {
 	size_t	i;
 
@@ -30,7 +30,7 @@ void	pipe_needed(t_minishell *minishell, t_commands *command)
 		command = command->next;
 	}
 	if (i > 1)
-		minishell->ispipe = true;
+		executor->ispipe = true;
 }
 
 /**
