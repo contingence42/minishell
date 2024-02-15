@@ -6,12 +6,16 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/14 13:03:45 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/15 09:31:31 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/**
+ * TODO: the function will take the minishell struct, will handle
+ * the return values and call the general handler when the inpt is valid
+ */
 void	show_prompt(void)
 {
 	char	*inpt;
@@ -32,8 +36,26 @@ void	show_prompt(void)
 	}
 }
 
-int	main(void)
+/**
+ * @brief starting point of minishell
+ *
+ * TODO:initialisation of default variables, then call to readline
+ *
+ * @param argc unused
+ * @param argv unused
+ * @param envp the environment
+ * @return code
+ */
+int	main(int argc, char *argv[], char *envp[])
 {
+	t_minishell	*minishell;
+
+	minishell = ft_calloc(1, sizeof(t_minishell));
+	minishell->env = ft_stradup(envp);
 	show_prompt();
-	return (0);
+	(void)argc;
+	(void)argv;
+	ft_free_astr(minishell->env);
+	free(minishell);
+	return (EXIT_SUCCESS);
 }
