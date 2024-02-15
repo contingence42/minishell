@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 09:12:42 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 13:43:40 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	get_path(t_commands *command, t_executor *executor)
  */
 void	execute(t_commands *command, t_executor *executor)
 {
+	char	**env;
+
 	setup_fd(command, executor);
 	if (get_path(command, executor) == -1)
 		clean_exit(MALLOC_ERROR, executor, 0);
@@ -124,7 +126,9 @@ void	execute(t_commands *command, t_executor *executor)
 		clean_exit(command->cmd_name, executor, 127);
 	else
 	{
-		execve(command->cmd_name, command->cmd, *(executor->env));
+		env = env_collapse(*(executor->env));
+		execve(command->cmd_name, command->cmd, env);
+		ft_free_astr(env);
 		clean_exit(command->cmd_name, executor, 126);
 	}
 	clean_exit(NULL, executor, 127);

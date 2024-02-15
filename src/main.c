@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 09:31:31 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:03:47 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ void	show_prompt(void)
 		printf("\n");
 		++i;
 	}
+	(void)i;
+}
+
+/**
+ * @brief initialise the env linked-list with the default environment
+ *
+ * @param env the linked-list to be created
+ * @param envp the default environment
+ */
+void	init_env(t_env **env, char *envp[])
+{
+	size_t	i;
+
+	i = -1;
+	while (envp[++i])
+		env_add_back(env, env_new(envp[i]));
 }
 
 /**
@@ -51,11 +67,12 @@ int	main(int argc, char *argv[], char *envp[])
 	t_minishell	*minishell;
 
 	minishell = ft_calloc(1, sizeof(t_minishell));
-	minishell->env = ft_stradup(envp);
+	minishell->env = NULL;
+	init_env(&(minishell->env), envp);
 	show_prompt();
 	(void)argc;
 	(void)argv;
-	ft_free_astr(minishell->env);
+	env_clear(&(minishell->env));
 	free(minishell);
 	return (EXIT_SUCCESS);
 }

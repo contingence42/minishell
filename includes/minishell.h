@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 09:50:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:02:38 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "libft.h"
 # include <fcntl.h>
 # include <errno.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -76,13 +76,21 @@ typedef struct s_commands
 	struct s_commands	*next;
 }	t_commands;
 
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*before;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_executor
 {
 	pid_t		pid;
 	t_file		infile;
 	t_file		outfile;
+	t_env		**env;
 	bool		ispipe;
-	char		***env;
 	char		**path;
 	char		*limiter;
 	char		*infn;
@@ -96,7 +104,7 @@ typedef struct s_executor
 
 typedef struct s_minishell
 {
-	char	**env;
+	t_env	*env;
 }	t_minishell;
 
 bool	lex_malloc_check(t_lexer *list);
@@ -110,9 +118,17 @@ t_lexer	*lex_last(t_lexer *list);
 t_lexer	*lexer(char *line);
 t_lexer	*handle_quotes(char *line);
 
+t_env	*env_new(char *content);
+t_env	*env_last(t_env *list);
+t_env	*env_get(t_env *list, char *key);
+char	**env_collapse(t_env *list);
+void	env_add_back(t_env **list, t_env *node);
+void	env_clear(t_env **list);
+
 bool	isbroken_pipe(t_commands *command);
 int		safe_open(t_executor *executor, int flag);
 int		wait_childs(t_executor *executor);
+int		get_env_pos(char **env, char *key);
 void	close_pipe(int pipe[2]);
 void	execute(t_commands *command, t_executor *executor);
 void	clean_exit(char *s, t_executor *executor, int code);
@@ -123,8 +139,8 @@ void	ft_cd(t_commands *command);
 void	ft_echo(t_commands *command);
 void	ft_pwd(t_commands *command);
 void	ft_env(t_executor *executor);
-void	ft_export(t_commands *command);
-void	ft_unset(t_commands *command);
+void	ft_export(t_executor *executor, t_commands *command);
+void	ft_unset(t_executor *executor, t_commands *command);
 void	ft_exit(t_commands *command);
 
 #endif

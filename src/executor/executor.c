@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 09:52:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:46:14 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	handle_heredoc(t_executor *executor)
  *
  * TODO: probably clarify that builtins doesn't accept input and output
  *
- * @param command the linked-list of command
+ * @param command the linked-list of commands
  */
 void	handle_builtins(t_executor *executor, t_commands *command)
 {
@@ -60,9 +60,9 @@ void	handle_builtins(t_executor *executor, t_commands *command)
 	else if (!ft_strcmp(command->cmd_name, "pwd"))
 		ft_pwd(command);
 	else if (!ft_strcmp(command->cmd_name, "export"))
-		ft_export(command);
+		ft_export(executor, command);
 	else if (!ft_strcmp(command->cmd_name, "unset"))
-		ft_unset(command);
+		ft_unset(executor, command);
 	else if (!ft_strcmp(command->cmd_name, "env"))
 		ft_env(executor);
 	else if (!ft_strcmp(command->cmd_name, "exit"))
@@ -74,7 +74,7 @@ void	handle_builtins(t_executor *executor, t_commands *command)
  *
  * setup the pipe if necessary, then fork and execute
  *
- * @param command the linked-list of command
+ * @param command the linked-list of commands
  * @param executor the struct of the exec process
  */
 void	handle_forking(t_commands *command, t_executor *executor)
@@ -101,9 +101,6 @@ void	handle_forking(t_commands *command, t_executor *executor)
 
 /**
  * @brief handle the execution of all the command
- *
- * TODO:evertyhing about the structs need to be clarified,
- * which variables will be in the linked-list, which will be in the struct, etc
  *
  * @param executor the struct of the exec process
  * @param command the linked-list of commands
