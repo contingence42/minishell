@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 14:11:51 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:02:38 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "libft.h"
 # include <fcntl.h>
 # include <errno.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 

@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:52:51 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 14:52:52 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:59:55 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	env_clear(t_env **list)
 		free((*list)->key);
 		free((*list)->value);
 		free(*list);
+		*list = next;
 	}
 	*list = NULL;
 }
