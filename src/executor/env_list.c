@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:52:51 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 15:59:55 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/16 09:47:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_env	*env_new(char *content)
 	node = ft_calloc(1, sizeof(t_env));
 	if (!node)
 		return (NULL);
-	pos = ft_getinset('=', content);
+	pos = ft_strchrpos(content, '=');
 	if (pos == -1)
 		return (NULL);
 	node->key = ft_substr(content, 0, pos);
