@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 16:02:38 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/19 10:43:30 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef enum e_lextype
 	UNDEF,
 	SQUOTE,
 	DQUOTE,
+	DOLLAR,
 	PIPE,
 	HEREDOC,
 	RDR_IN,
@@ -60,7 +61,6 @@ typedef enum e_file
 typedef struct s_lexer
 {
 	char			*content;
-	size_t			index;
 	t_lextype		type;
 	struct s_lexer	*before;
 	struct s_lexer	*next;
@@ -115,8 +115,10 @@ void	lex_add_after(t_lexer **list, t_lexer *node);
 t_lexer	*lex_new(char *content, t_lextype type);
 t_lexer	*lex_geti(t_lexer *list, size_t index);
 t_lexer	*lex_last(t_lexer *list);
-t_lexer	*lexer(char *line);
+
+t_lexer	*lexer(char *line, t_minishell *minishell);
 t_lexer	*handle_quotes(char *line);
+void	handle_expansion(t_lexer **list, t_minishell *minishell);
 
 t_env	*env_new(char *content);
 t_env	*env_last(t_env *list);
