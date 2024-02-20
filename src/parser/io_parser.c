@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:01:58 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 10:29:47 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:09:13 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	push_cmd(t_commands **command, char ***tmp, int *i)
  * @param executor the struct of the exec process
  * @param command the linked-list of commands
  */
-int		io_handler(t_lexer *node, t_executor **executor, t_commands **command)
+int	io_handler(t_lexer *node, t_executor **executor, t_commands **command)
 {
 	char	*str;
 

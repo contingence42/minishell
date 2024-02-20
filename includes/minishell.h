@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 12:56:38 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:06:39 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_env		*env_new(char *content);
 t_env		*env_last(t_env *list);
 t_env		*env_get(t_env *list, char *key);
 char		**env_collapse(t_env *list);
-void		env_add_back(t_env **list, t_env *node);
+int			env_add_back(t_env **list, t_env *node);
 void		env_clear(t_env **list);
 
 bool		isbroken_pipe(t_commands *command);
