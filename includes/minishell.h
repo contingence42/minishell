@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 13:06:39 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,11 +125,14 @@ t_lexer		*handle_quotes(char *line);
 int			handle_expansion(t_lexer **list, t_minishell *minishell);
 
 int			parser(t_lexer *lex, t_executor **executor, t_commands **command);
-int			io_handler(t_lexer *node, t_executor **executor,
+int			io_handler(t_lexer **node, t_executor *executor,
 				t_commands **command);
+int			pipe_handler(t_executor *exec, t_commands **cmd, char ***tmp,
+				int *i);
 int			push_cmd(t_commands **command, char ***tmp, int *i);
 int			cmd_add_back(t_commands **command, t_commands *node);
 t_commands	*cmd_new(char	**content);
+void		cmd_clear(t_commands **cmd);
 
 t_env		*env_new(char *content);
 t_env		*env_last(t_env *list);

@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 12:57:39 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:13:27 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int	separate_dollars(t_lexer *list)
  *
  * @param list the linked-list of the lexer
  * @param env the linked-list of the environment
+ * @return err code in case of malloc errors
  */
 static int	expand(t_lexer *list, t_env *env)
 {
@@ -117,6 +118,7 @@ static int	expand(t_lexer *list, t_env *env)
  *
  * @param list the linked-list of the lexer
  * @param minishell the general struct of the program
+ * @return error code in case of malloc errors
  */
 int	handle_expansion(t_lexer **list, t_minishell *minishell)
 {

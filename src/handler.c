@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:32:25 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 13:01:26 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:34 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	handler(char *line, t_minishell *minishell)
 	{
 		lex_clear(&lex);
 		free(executor);
+		cmd_clear(&command);
 		return ;
 	}
 	executor->env = &(minishell->env);
