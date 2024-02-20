@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 14:46:14 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 09:43:09 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	handle_forking(t_commands *command, t_executor *executor)
  * @param executor the struct of the exec process
  * @param command the linked-list of commands
  */
-void	the_executor(t_executor *executor, t_commands *command)
+int	the_executor(t_executor *executor, t_commands *command)
 {
 	executor->saved_stdin = dup(STDIN_FILENO);
 	find_path(executor);
@@ -119,5 +119,5 @@ void	the_executor(t_executor *executor, t_commands *command)
 			handle_forking(command, executor);
 		command = command->next;
 	}
-	wait_childs(executor);
+	return (wait_childs(executor));
 }

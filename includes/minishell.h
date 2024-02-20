@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 09:27:52 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 09:43:32 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_executor
 typedef struct s_minishell
 {
 	t_env	*env;
+	int		code;
 }	t_minishell;
 
 void		handler(char *line, t_minishell *minishell);
@@ -144,7 +145,7 @@ void		execute(t_commands *command, t_executor *executor);
 void		clean_exit(char *s, t_executor *executor, int code);
 void		find_path(t_executor *executor);
 void		write_heredoc(char *eof, int fd);
-void		the_executor(t_executor *executor, t_commands *command);
+int			the_executor(t_executor *executor, t_commands *command);
 
 void		ft_cd(t_commands *command);
 void		ft_echo(t_commands *command);

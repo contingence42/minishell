@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:32:25 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 09:36:11 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 09:42:56 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ void	handler(char *line, t_minishell *minishell)
 	command = NULL;
 	parser(lex, &executor, &command);
 	executor->env = &(minishell->env);
-	the_executor(executor, command);
+	minishell->code = the_executor(executor, command);
 }

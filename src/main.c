@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 09:23:58 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 09:41:58 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,17 @@ void	init_env(t_env **env, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	*minishell;
+	int			code;
 
 	minishell = ft_calloc(1, sizeof(t_minishell));
 	minishell->env = NULL;
+	minishell->code = EXIT_SUCCESS;
 	init_env(&(minishell->env), envp);
 	show_prompt(minishell);
 	(void)argc;
 	(void)argv;
 	env_clear(&(minishell->env));
+	code = minishell->code;
 	free(minishell);
-	return (EXIT_SUCCESS);
+	return (code);
 }
