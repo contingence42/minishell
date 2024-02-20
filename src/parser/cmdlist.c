@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:39:24 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 09:38:24 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:21:54 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,22 @@ t_commands	*cmd_new(char	**content)
  * @param command the linked-list of commands
  * @param node the new node to be added
  */
-void	cmd_add_back(t_commands **command, t_commands *node)
+int	cmd_add_back(t_commands **command, t_commands *node)
 {
 	t_commands	*last;
 
 	if (!node)
-		return ;
+		return (malloc_error());
 	if (!*command)
 	{
 		node->first = true;
 		*command = node;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	last = cmd_last(*command);
 	node->next = last->next;
 	last->last = false;
 	node->last = true;
 	last->next = node;
+	return (EXIT_SUCCESS);
 }
