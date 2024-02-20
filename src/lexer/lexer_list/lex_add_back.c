@@ -6,18 +6,21 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 09:05:56 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/01 09:09:43 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:48:35 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lex_add_back(t_lexer **list, t_lexer *node)
+void	lex_add_back(t_lexer **list, t_lexer *node, int *err)
 {
 	t_lexer	*last;
 
-	if (!node)
+	if (!node || *err)
+	{
+		*err = 1;
 		return ;
+	}
 	if (!*list)
 	{
 		*list = node;

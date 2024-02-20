@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:16:42 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/19 10:44:02 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:59:09 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_lexer	*lexer(char *line, t_minishell *minishell)
 	t_lexer	*list;
 
 	list = handle_quotes(line);
-	handle_expansion(&list, minishell);
+	if (!list)
+		return (NULL);
+	if (handle_expansion(&list, minishell) == EXIT_FAILURE)
+		return (lex_clear(&list), NULL);
 	return (list);
 }

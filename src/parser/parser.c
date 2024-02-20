@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:37:43 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 10:41:45 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:01:42 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ static int	dispatch(t_lexer *node, t_executor **executor, t_commands **command, 
 int	parser(t_lexer *lex, t_executor **executor, t_commands **command)
 {
 	char	**tmp;
+
 	*executor = ft_calloc(1, sizeof(**executor));
 	if (!*executor)
 		return (malloc_error());
