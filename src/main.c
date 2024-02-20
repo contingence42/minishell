@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/15 16:03:47 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 09:41:58 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * TODO: the function will take the minishell struct, will handle
  * the return values and call the general handler when the inpt is valid
  */
-void	show_prompt(void)
+void	show_prompt(t_minishell *minishell)
 {
 	char	*inpt;
 	int		i;
@@ -30,7 +30,10 @@ void	show_prompt(void)
 		if (ft_strcmp(inpt, "history -c") == 0)
 			rl_clear_history();
 		if (inpt && inpt[0])
+		{
 			add_history(inpt);
+			handler(inpt, minishell);
+		}
 		printf("\n");
 		++i;
 	}
@@ -65,14 +68,17 @@ void	init_env(t_env **env, char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_minishell	*minishell;
+	int			code;
 
 	minishell = ft_calloc(1, sizeof(t_minishell));
 	minishell->env = NULL;
+	minishell->code = EXIT_SUCCESS;
 	init_env(&(minishell->env), envp);
-	show_prompt();
+	show_prompt(minishell);
 	(void)argc;
 	(void)argv;
 	env_clear(&(minishell->env));
+	code = minishell->code;
 	free(minishell);
-	return (EXIT_SUCCESS);
+	return (code);
 }
