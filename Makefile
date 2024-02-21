@@ -6,7 +6,7 @@
 #    By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/02/05 11:02:14 by kdaumont         ###   ########.fr        #
+#    Updated: 2024/02/21 13:08:40 by aattali          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ TARGET := minishell
 #* ************************************************************************** *#
 
 CC := clang
-CFLAGS += -Wall -Werror -Wextra 
+CFLAGS += -Wall -Werror -Wextra
 LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm -lreadline
 
 #* ************************************************************************** *#
@@ -226,6 +226,13 @@ gmk:
 norm:
 	@norminette $(LIBFT_DIR)
 	@norminette $(SRCDIR) $(INCLUDES)
+
+vg: debug
+	valgrind --track-origins=yes --leak-check=full --suppressions=readline.supp ./minishell
+
+vgc: debug
+	valgrind --track-origins=yes --leak-check=full --track-fds=yes --trace-children=yes --suppressions=readline.supp ./minishell
+
 # --------------------- #
 #      Recompile.       #
 # --------------------- #
@@ -246,4 +253,4 @@ sanadd: all
 
 santhread: all
 
-.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread norm
+.PHONY: bonus clean fclean fcleanlib gmk re relib noflag debug optimize sanadd santhread norm vg vgc

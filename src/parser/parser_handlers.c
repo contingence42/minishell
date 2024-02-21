@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:01:58 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 14:34:09 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 12:40:39 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ int	io_handler(t_lexer **node, t_executor *executor, t_commands **command)
 		}
 		if (!io_sl(*node, executor, command, str))
 			return (EXIT_SUCCESS);
+		if (!(*node)->next)
+			break ;
 		*node = (*node)->next;
 	}
 	return (EXIT_SUCCESS);

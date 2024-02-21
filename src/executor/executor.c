@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 09:43:09 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:10:12 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,7 @@ int	the_executor(t_executor *executor, t_commands *command)
 			handle_forking(command, executor);
 		command = command->next;
 	}
+	dup2(executor->saved_stdin, STDIN_FILENO);
+	close(executor->saved_stdin);
 	return (wait_childs(executor));
 }

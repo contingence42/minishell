@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 11:23:03 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:09:32 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	execute(t_commands *command, t_executor *executor)
 {
 	char	**env;
 
+	close(executor->saved_stdin);
 	setup_fd(command, executor);
 	if (get_path(command, executor) == -1)
 		clean_exit(MALLOC_ERROR, executor, 0);
