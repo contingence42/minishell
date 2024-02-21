@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:37:43 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 14:28:49 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:20:05 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	dispatch(t_lexer *node, t_executor *exec, t_commands **cmd, int *i)
 				return (malloc_error());
 		}
 		if (io_handler(&node, exec, cmd) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (ft_free_astr(tmp), EXIT_FAILURE);
 		if (node->type == PIPE && pipe_handler(exec, cmd, &tmp, i))
 			return (EXIT_FAILURE);
 		else if (accumulate_cmd(node, tmp, i) == EXIT_FAILURE)
@@ -108,7 +108,7 @@ static int	dispatch(t_lexer *node, t_executor *exec, t_commands **cmd, int *i)
  * @param lex the linked-list of lexed elements
  * @param executor the struct of the exec process
  * @param command the linked-list of commands
- * @return err code in case of malloc errors
+ * @return error code in case of malloc errors
  */
 int	parser(t_lexer *lex, t_executor **executor, t_commands **command)
 {

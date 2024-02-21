@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 13:13:27 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:22:21 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	update_lex(t_lexer *node, int pos_d, int pos_e, int *err)
  * @brief create new DOLLAR nodes between existing nodes if expansion is needed
  *
  * @param list the linked-list of the lexer
- * @return err the error code, 1 if malloc err
+ * @return error code in case of malloc errors
  */
 static int	separate_dollars(t_lexer *list)
 {
@@ -81,7 +81,7 @@ static int	separate_dollars(t_lexer *list)
  *
  * @param list the linked-list of the lexer
  * @param env the linked-list of the environment
- * @return err code in case of malloc errors
+ * @return error code in case of malloc errors
  */
 static int	expand(t_lexer *list, t_env *env)
 {

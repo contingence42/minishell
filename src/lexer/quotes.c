@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 12:45:24 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:21:13 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	get_sepend(char *str, char c)
  * @param list the linked-list
  * @param line the line given by readline
  * @param sepend the position of the paired separator
- * @param pack three iterators packed inside an array
+ * @param pack three iterators and the error code packed inside an array
  */
 void	add_lex_quotes(t_lexer **list, char *line, int sepend, int pack[4])
 {
@@ -64,7 +64,7 @@ void	add_lex_quotes(t_lexer **list, char *line, int sepend, int pack[4])
  * pack[0] = i, standard iterator over string
  * pack[1] = k, initial position of the start of the substr
  * pack[2] = c, separator
- * pack[3] = err flag for malloc err toggled by add_back
+ * pack[3] = error flag for malloc error toggled by add_back
  *
  * @param list the linked-list to be created
  * @param line the line given by readline
