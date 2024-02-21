@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:03:49 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 12:26:26 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:26:23 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ t_lexer	*handle_separator(t_lexer **list)
 	{
 		if (tmp->type == UNDEF)
 			manage_separator(tmp->content, &new);
+		else
+			lex_add_back(&new, lex_new(tmp->content, tmp->type));
 		tmp = tmp->next;
 	}
 	return (new);
