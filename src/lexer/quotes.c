@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 13:59:12 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:04:10 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ t_lexer	*handle_quotes(char *line)
 			ft_dprintf(STDERR_FILENO, UNCLOSED_QUOTE_ERROR);
 		lex_clear(&list);
 	}
-	// free(line);
+	free(line);
 	return (list);
 }

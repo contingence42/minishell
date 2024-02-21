@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:03:49 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/21 14:01:39 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:03:55 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_separator(char *content)
 */
 char	*get_flags_name(char **splited, int j)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = "";
 	while (splited[j] && !check_separator(splited[j]))
@@ -82,7 +82,8 @@ void	create_separators_nodes(char **splited, int count, t_lexer **list)
 	}
 }
 
-/* Count how many node are needed to separate the content and create the new nodes
+/* Count how many node are needed to separate the content and 
+create the new nodes
 @param content -> the content to check
 @return the number of node needed
 */
