@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/21 13:59:35 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:00:11 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,6 @@ int	init_env(t_env **env, char *envp[])
 	return (EXIT_SUCCESS);
 }
 
-void	print_lexer(t_lexer *list)
-{
-	t_lexer	*tmp;
-
-	tmp = list;
-	while (tmp)
-	{
-		printf("content : %s\n", tmp->content);
-		printf("type : %d\n", tmp->type);
-		tmp = tmp->next;
-	}
-}
-
 /**
  * @brief starting point of minishell
  *
@@ -94,8 +81,7 @@ int	main(int argc, char *argv[], char *envp[])
 		return (free(minishell), EXIT_FAILURE);
 	show_prompt(minishell);
 	(void)argc;
-	// (void)argv;
-	print_lexer(lexer(argv[1], minishell));
+	(void)argv;
 	env_clear(&(minishell->env));
 	code = minishell->code;
 	free(minishell);

@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:03:49 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/19 15:10:46 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:26:26 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,29 @@ int	check_separator(char *content)
 	return (0);
 }
 
+/* Get all flags for a command
+@param splited -> command str split
+@param j -> last index
+@return all name str
+*/
+char	*get_flags_name(char **splited, int j)
+{
+	char *tmp;
+
+	tmp = "";
+	while (splited[j] && !check_separator(splited[j]))
+	{
+		tmp = ft_strjoin3(tmp, " ", splited[j]);
+		j++;
+	}
+	return (tmp);
+}
+
+/* Create fine nodes for the command list
+@param splited -> command str split
+@param count -> amount of fine nodes
+@param list -> new list
+*/
 void	create_separators_nodes(char **splited, int count, t_lexer **list)
 {
 	int		i;
@@ -43,8 +66,11 @@ void	create_separators_nodes(char **splited, int count, t_lexer **list)
 	j = 0;
 	while (++i < count)
 	{
-		new = lex_new(splited[j], COMMAND);
-		lex_add_back(list, new);
+		if (splited[j])
+		{
+			new = lex_new(get_flags_name(splited, j), COMMAND);
+			lex_add_back(list, new);
+		}
 		while (splited[j] && !check_separator(splited[j]))
 			j++;
 		if (splited[j])
@@ -82,16 +108,20 @@ int	manage_separator(char *content, t_lexer **list)
 				count++;
 	}
 	create_separators_nodes(splited, count, list);
-	// ft_free_astr(splited);
 	return (count);
 }
 
+/* Call all functions for separate the list
+@param list -> the list to iterate
+@return new list separated
+*/
 t_lexer	*handle_separator(t_lexer **list)
 {
 	t_lexer	*tmp;
 	t_lexer	*new;
 
 	tmp = *list;
+	new = NULL;
 	while (tmp)
 	{
 		if (tmp->type == UNDEF)
