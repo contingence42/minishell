@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 09:43:32 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,31 +109,36 @@ typedef struct s_minishell
 }	t_minishell;
 
 void		handler(char *line, t_minishell *minishell);
+int			malloc_error(void);
 
 bool		lex_malloc_check(t_lexer *list);
 void		lex_clear(t_lexer **list);
-void		lex_add_back(t_lexer **list, t_lexer *node);
+void		lex_add_back(t_lexer **list, t_lexer *node, int *err);
 void		lex_add_before(t_lexer *list, t_lexer *node);
-void		lex_add_after(t_lexer **list, t_lexer *node);
+void		lex_add_after(t_lexer **list, t_lexer *node, int *err);
 t_lexer		*lex_new(char *content, t_lextype type);
 t_lexer		*lex_geti(t_lexer *list, size_t index);
 t_lexer		*lex_last(t_lexer *list);
 
 t_lexer		*lexer(char *line, t_minishell *minishell);
 t_lexer		*handle_quotes(char *line);
-void		handle_expansion(t_lexer **list, t_minishell *minishell);
+int			handle_expansion(t_lexer **list, t_minishell *minishell);
 
-void		parser(t_lexer *lex, t_executor **executor, t_commands **command);
-void		io_handler(t_lexer *node, t_executor **executor,
+int			parser(t_lexer *lex, t_executor **executor, t_commands **command);
+int			io_handler(t_lexer **node, t_executor *executor,
 				t_commands **command);
+int			pipe_handler(t_executor *exec, t_commands **cmd, char ***tmp,
+				int *i);
+int			push_cmd(t_commands **command, char ***tmp, int *i);
+int			cmd_add_back(t_commands **command, t_commands *node);
 t_commands	*cmd_new(char	**content);
-void		cmd_add_back(t_commands **command, t_commands *node);
+void		cmd_clear(t_commands **cmd);
 
 t_env		*env_new(char *content);
 t_env		*env_last(t_env *list);
 t_env		*env_get(t_env *list, char *key);
 char		**env_collapse(t_env *list);
-void		env_add_back(t_env **list, t_env *node);
+int			env_add_back(t_env **list, t_env *node);
 void		env_clear(t_env **list);
 
 bool		isbroken_pipe(t_commands *command);

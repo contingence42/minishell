@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:39:24 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 09:38:24 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:34:02 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ static bool	is_builtin(char *cmd)
 }
 
 /**
+ * @brief clear the entire linked-list of commands
+ *
+ * @param cmd the linked-list of commands to be destroyed
+ */
+void	cmd_clear(t_commands **cmd)
+{
+	t_commands	*next;
+
+	if (!cmd)
+		return ;
+	while (*cmd)
+	{
+		next = (*cmd)->next;
+		ft_free_astr((*cmd)->cmd);
+		free((*cmd)->cmd_name);
+		free(*cmd);
+		*cmd = next;
+	}
+	*cmd = NULL;
+}
+
+/**
  * @brief create a new node in the linked-list of commands
  *
  * @param content the cmd splitted in a array of strings
@@ -67,7 +89,9 @@ t_commands	*cmd_new(char	**content)
 	if (!node)
 		return (NULL);
 	node->cmd = content;
-	node->cmd_name = content[0];
+	node->cmd_name = ft_strdup(content[0]);
+	if (!node->cmd_name)
+		return (free(node), NULL);
 	node->builtin = false;
 	if (is_builtin(node->cmd_name))
 		node->builtin = true;
@@ -83,21 +107,22 @@ t_commands	*cmd_new(char	**content)
  * @param command the linked-list of commands
  * @param node the new node to be added
  */
-void	cmd_add_back(t_commands **command, t_commands *node)
+int	cmd_add_back(t_commands **command, t_commands *node)
 {
 	t_commands	*last;
 
 	if (!node)
-		return ;
+		return (malloc_error());
 	if (!*command)
 	{
 		node->first = true;
 		*command = node;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	last = cmd_last(*command);
 	node->next = last->next;
 	last->last = false;
 	node->last = true;
 	last->next = node;
+	return (EXIT_SUCCESS);
 }

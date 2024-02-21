@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 09:41:58 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:08:43 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,15 @@ void	show_prompt(t_minishell *minishell)
  * @param env the linked-list to be created
  * @param envp the default environment
  */
-void	init_env(t_env **env, char *envp[])
+int	init_env(t_env **env, char *envp[])
 {
 	size_t	i;
 
 	i = -1;
 	while (envp[++i])
-		env_add_back(env, env_new(envp[i]));
+		if (env_add_back(env, env_new(envp[i])) == EXIT_FAILURE)
+			return (env_clear(env), malloc_error());
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -71,9 +73,12 @@ int	main(int argc, char *argv[], char *envp[])
 	int			code;
 
 	minishell = ft_calloc(1, sizeof(t_minishell));
+	if (!minishell)
+		return (malloc_error());
 	minishell->env = NULL;
 	minishell->code = EXIT_SUCCESS;
-	init_env(&(minishell->env), envp);
+	if (init_env(&(minishell->env), envp) == EXIT_FAILURE)
+		return (free(minishell), EXIT_FAILURE);
 	show_prompt(minishell);
 	(void)argc;
 	(void)argv;

@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/19 10:42:20 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:22:21 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
  * @param node the node to be separated, where a variable to be expanded exist
  * @param pos_d the position of the $ character
  * @param pos_e the position of ' ', signifying the end of the variable
+ * @param err the error code that will be toggled if there's a malloc error
  */
-static void	update_lex(t_lexer *node, int pos_d, int pos_e)
+static void	update_lex(t_lexer *node, int pos_d, int pos_e, int *err)
 {
 	int		len;
 	char	*content;
@@ -28,15 +29,17 @@ static void	update_lex(t_lexer *node, int pos_d, int pos_e)
 	len = ft_strlen(content);
 	if (pos_e == -1)
 		lex_add_after(&node, lex_new(ft_substr(content, pos_d + 1, len),
-				DOLLAR));
+				DOLLAR), err);
 	else
 	{
 		lex_add_after(&node, lex_new(ft_substr(content, pos_d + 1, pos_e),
-				DOLLAR));
+				DOLLAR), err);
 		lex_add_after(&(node->next), lex_new(ft_substr(content, pos_e, len),
-				node->type));
+				node->type), err);
 	}
 	node->content = ft_substr(content, 0, pos_d);
+	if (!node->content)
+		*err = 1;
 	free(content);
 }
 
@@ -44,12 +47,15 @@ static void	update_lex(t_lexer *node, int pos_d, int pos_e)
  * @brief create new DOLLAR nodes between existing nodes if expansion is needed
  *
  * @param list the linked-list of the lexer
+ * @return error code in case of malloc errors
  */
-static void	separate_dollars(t_lexer *list)
+static int	separate_dollars(t_lexer *list)
 {
 	int		pos_d;
 	int		pos_e;
+	int		err;
 
+	err = 0;
 	while (list)
 	{
 		if (list->type != SQUOTE && list->type != DOLLAR)
@@ -61,10 +67,11 @@ static void	separate_dollars(t_lexer *list)
 				continue ;
 			}
 			pos_e = ft_strchrpos(list->content + pos_d, ' ');
-			update_lex(list, pos_d, pos_e);
+			update_lex(list, pos_d, pos_e, &err);
 		}
 		list = list->next;
 	}
+	return (err);
 }
 
 /**
@@ -74,8 +81,9 @@ static void	separate_dollars(t_lexer *list)
  *
  * @param list the linked-list of the lexer
  * @param env the linked-list of the environment
+ * @return error code in case of malloc errors
  */
-static void	expand(t_lexer *list, t_env *env)
+static int	expand(t_lexer *list, t_env *env)
 {
 	t_env	*envr;
 
@@ -88,6 +96,8 @@ static void	expand(t_lexer *list, t_env *env)
 			{
 				free(list->content);
 				list->content = ft_strdup(envr->value);
+				if (!list->content)
+					return (EXIT_FAILURE);
 			}
 			else
 			{
@@ -97,23 +107,29 @@ static void	expand(t_lexer *list, t_env *env)
 		}
 		list = list->next;
 	}
+	return (EXIT_SUCCESS);
 }
 
 /**
  * @brief expand the variables inside the linked-list
  *
- * TODO:error handling
  * NOTE:the expanded variable in bash will not be interpreted by the parser
  * we can consider the variable to be between double quotes
  *
  * @param list the linked-list of the lexer
  * @param minishell the general struct of the program
+ * @return error code in case of malloc errors
  */
-void	handle_expansion(t_lexer **list, t_minishell *minishell)
+int	handle_expansion(t_lexer **list, t_minishell *minishell)
 {
 	t_env	*env;
+	int		err;
 
 	env = minishell->env;
-	separate_dollars(*list);
-	expand(*list, env);
+	err = separate_dollars(*list);
+	if (!err)
+		err = expand(*list, env);
+	if (err)
+		return (malloc_error());
+	return (EXIT_SUCCESS);
 }

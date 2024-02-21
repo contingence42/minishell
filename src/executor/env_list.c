@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:52:51 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/16 09:47:23 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/20 13:06:29 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,21 +74,22 @@ t_env	*env_get(t_env *list, char *key)
  * @param list the linked-list of the environment
  * @param node a node created by env_new
  */
-void	env_add_back(t_env **list, t_env *node)
+int	env_add_back(t_env **list, t_env *node)
 {
 	t_env	*last;
 
 	if (!node)
-		return ;
+		return (EXIT_FAILURE);
 	if (!*list)
 	{
 		*list = node;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	last = env_last(*list);
 	node->next = last->next;
 	node->before = last;
 	last->next = node;
+	return (EXIT_SUCCESS);
 }
 
 /**

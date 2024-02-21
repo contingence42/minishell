@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/15 13:43:40 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:23:03 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	wait_childs(t_executor *executor)
 /**
  * @brief open, close and dup the necessary fds, for pipe, stdin and stdout
  *
- * @param command the linked list of command
+ * @param command the linked list of commands
  * @param executor the struct of the exec process
  */
 void	setup_fd(t_commands *command, t_executor *executor)
