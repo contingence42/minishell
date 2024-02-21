@@ -6,7 +6,7 @@
 #    By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/02/21 13:58:42 by kdaumont         ###   ########.fr        #
+#    Updated: 2024/02/21 14:02:03 by kdaumont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,7 @@ TARGET := minishell
 #* ************************************************************************** *#
 
 CC := clang
-<<<<<<< HEAD
-CFLAGS += -Wall -Werror -Wextra
-=======
 CFLAGS += -Wall -Werror -Wextra -g3
->>>>>>> eed742b (separator side)
 LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm -lreadline
 
 #* ************************************************************************** *#

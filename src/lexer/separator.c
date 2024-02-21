@@ -6,7 +6,7 @@
 /*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:03:49 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/21 13:26:23 by kdaumont         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:01:39 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void	create_separators_nodes(char **splited, int count, t_lexer **list)
 		if (splited[j])
 		{
 			new = lex_new(get_flags_name(splited, j), COMMAND);
-			lex_add_back(list, new);
+			lex_add_back(list, new, 0);
 		}
 		while (splited[j] && !check_separator(splited[j]))
 			j++;
 		if (splited[j])
 		{
 			new = lex_new(splited[j], check_separator(splited[j]));
-			lex_add_back(list, new);
+			lex_add_back(list, new, 0);
 			j++;
 		}
 	}
@@ -127,7 +127,7 @@ t_lexer	*handle_separator(t_lexer **list)
 		if (tmp->type == UNDEF)
 			manage_separator(tmp->content, &new);
 		else
-			lex_add_back(&new, lex_new(tmp->content, tmp->type));
+			lex_add_back(&new, lex_new(tmp->content, tmp->type), 0);
 		tmp = tmp->next;
 	}
 	return (new);
