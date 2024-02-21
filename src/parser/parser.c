@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:37:43 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 11:20:05 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 12:51:03 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	dispatch(t_lexer *node, t_executor *exec, t_commands **cmd, int *i)
 		if (!tmp)
 		{
 			len = cmdlen(node);
-			tmp = ft_calloc(len, sizeof(*tmp));
+			tmp = ft_calloc(len + 1, sizeof(*tmp));
 			if (!tmp)
 				return (malloc_error());
 		}
