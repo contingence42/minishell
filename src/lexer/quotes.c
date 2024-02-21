@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 11:21:13 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/21 13:59:12 by kdaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	loop_quotes(t_lexer **list, char *line)
 			pack[2] = c;
 			add_lex_quotes(list, line, sepend, pack);
 		}
-		else if (!ft_strchr(line + pack[0], '"')
-			&& !ft_strchr(line + pack[0], '\''))
+		else if (!ft_strchr(line + pack[0], '"') && !ft_strchr(line + pack[0],
+				'\''))
 		{
 			lex_add_back(list, lex_new(line + pack[0], UNDEF), &pack[3]);
 			break ;
@@ -122,6 +122,6 @@ t_lexer	*handle_quotes(char *line)
 			ft_dprintf(STDERR_FILENO, UNCLOSED_QUOTE_ERROR);
 		lex_clear(&list);
 	}
-	free(line);
+	// free(line);
 	return (list);
 }
