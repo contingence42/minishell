@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 11:21:13 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:01:46 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	add_lex_quotes(t_lexer **list, char *line, int sepend, int pack[4])
 	int		err;
 
 	err = 0;
-	lex_add_back(list, lex_new(ft_substr(line, pack[1], pack[0]
-				- pack[1]), UNDEF), &err);
+	if (pack[1] != pack[0])
+		lex_add_back(list, lex_new(ft_substr(line, pack[1], pack[0]
+					- pack[1]), UNDEF), &err);
 	substr = ft_substr(line, pack[0] + 1, sepend - 1);
 	if (pack[2] == '"')
 		lex_add_back(list, lex_new(substr, DQUOTE), &err);
@@ -78,7 +79,7 @@ int	loop_quotes(t_lexer **list, char *line)
 
 	pack[0] = -1;
 	pack[1] = 0;
-	while (line[++pack[0]])
+	while (line[++pack[0]] && !pack[3])
 	{
 		c = ft_getinset(line[pack[0]], "'\"");
 		if (c != -1)
@@ -92,7 +93,7 @@ int	loop_quotes(t_lexer **list, char *line)
 		else if (!ft_strchr(line + pack[0], '"')
 			&& !ft_strchr(line + pack[0], '\''))
 		{
-			lex_add_back(list, lex_new(line + pack[0], UNDEF), &pack[3]);
+			lex_add_back(list, lex_new(ft_strdup(line + pack[0]), UNDEF), &pack[3]);
 			break ;
 		}
 	}

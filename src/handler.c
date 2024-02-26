@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:32:25 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 13:11:00 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:41:27 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	malloc_error(void)
  * @param exec the struct of the exec process
  * @param cmd the linked list of commands
  */
-static void	clean_posthandle(t_lexer **lex, t_executor *exec, t_commands **cmd)
+/*static void	clean_posthandle(t_lexer **lex, t_executor *exec, t_commands **cmd)
 {
 	lex_clear(lex);
 	free(exec->outfn);
@@ -38,7 +38,7 @@ static void	clean_posthandle(t_lexer **lex, t_executor *exec, t_commands **cmd)
 	ft_free_astr(exec->path);
 	free(exec);
 	cmd_clear(cmd);
-}
+}*/
 
 /**
  * @brief handle the lexing, parsing and execution process
@@ -51,13 +51,13 @@ static void	clean_posthandle(t_lexer **lex, t_executor *exec, t_commands **cmd)
 void	handler(char *line, t_minishell *minishell)
 {
 	t_lexer		*lex;
-	t_executor	*executor;
-	t_commands	*command;
+	//t_executor	*executor;
+	//t_commands	*command;
 
 	lex = lexer(line, minishell);
 	if (!lex)
 		return ;
-	executor = NULL;
+	/*executor = NULL;
 	command = NULL;
 	if (parser(lex, &executor, &command) == EXIT_FAILURE)
 	{
@@ -68,5 +68,11 @@ void	handler(char *line, t_minishell *minishell)
 	}
 	executor->env = &(minishell->env);
 	minishell->code = the_executor(executor, command);
-	clean_posthandle(&lex, executor, &command);
+	clean_posthandle(&lex, executor, &command);*/
+	while (lex)
+	{
+		printf("%u : %s\n", lex->type, lex->content);
+		lex = lex->next;
+	}
+	lex_clear(&lex);
 }

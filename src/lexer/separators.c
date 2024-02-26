@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:39:50 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 10:57:15 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:07:14 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	get_separator(char *str)
  */
 static int	get_end(char *str, int pos_s)
 {
-	if (str[pos_s + 1] && str[pos_s + 1] == str[pos_s + 1])
+	if (str[pos_s + 1] && str[pos_s] == str[pos_s + 1])
 		return (pos_s + 1);
 	else
 		return (-1);
@@ -74,8 +74,8 @@ static void	update_lex(t_lexer *node, int pos_s, int pos_e, int *err)
 	else
 		lex_add_after(&node, lex_new(NULL, get_lextype(content[pos_s], 1)),
 			err);
-	lex_add_after(&node, lex_new(ft_substr(content, pos_e + 1, len), UNDEF),
-		err);
+	lex_add_after(&node->next, lex_new(ft_substr(content, pos_e + 1, len),
+			UNDEF), err);
 	node->content = ft_substr(content, 0, pos_s);
 	if (!node->content)
 		*err = 1;
@@ -95,7 +95,7 @@ static int	separate(t_lexer *list)
 	int		err;
 
 	err = 0;
-	while (list)
+	while (list && !err)
 	{
 		if (list->type == UNDEF)
 		{

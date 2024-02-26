@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 10:59:49 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:34:09 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ t_lexer		*lexer(char *line, t_minishell *minishell);
 t_lexer		*handle_quotes(char *line);
 int			handle_expansion(t_lexer **list, t_minishell *minishell);
 int			handle_separators(t_lexer **list);
+int			handle_cmdio(t_lexer **list);
 
 int			parser(t_lexer *lex, t_executor **executor, t_commands **command);
 int			io_handler(t_lexer **node, t_executor *executor,

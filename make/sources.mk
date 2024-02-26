@@ -13,6 +13,7 @@ SOURCES += ./src/executor/forking.c
 SOURCES += ./src/executor/io_exec.c
 SOURCES += ./src/executor/pathenv.c
 SOURCES += ./src/executor/pipe_utils.c
+SOURCES += ./src/lexer/cmdio.c
 SOURCES += ./src/lexer/expansion.c
 SOURCES += ./src/lexer/lexer.c
 SOURCES += ./src/lexer/quotes.c

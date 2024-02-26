@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 11:22:21 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 14:32:56 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	separate_dollars(t_lexer *list)
 	int		err;
 
 	err = 0;
-	while (list)
+	while (list && !err)
 	{
 		if (list->type != SQUOTE && list->type != DOLLAR)
 		{
