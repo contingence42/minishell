@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kdaumont <kdaumont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 09:43:59 by kdaumont          #+#    #+#             */
-/*   Updated: 2024/02/20 14:33:23 by aattali          ###   ########.fr       */
+/*   Created: 2024/01/30 09:43:59 by aattali           #+#    #+#             */
+/*   Updated: 2024/02/26 10:59:49 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,12 @@ void		lex_add_after(t_lexer **list, t_lexer *node, int *err);
 t_lexer		*lex_new(char *content, t_lextype type);
 t_lexer		*lex_geti(t_lexer *list, size_t index);
 t_lexer		*lex_last(t_lexer *list);
+t_lextype	get_lextype(char c, int dbl);
 
 t_lexer		*lexer(char *line, t_minishell *minishell);
 t_lexer		*handle_quotes(char *line);
 int			handle_expansion(t_lexer **list, t_minishell *minishell);
+int			handle_separators(t_lexer **list);
 
 int			parser(t_lexer *lex, t_executor **executor, t_commands **command);
 int			io_handler(t_lexer **node, t_executor *executor,
