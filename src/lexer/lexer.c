@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:16:42 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/20 12:59:09 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/26 10:57:28 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
  * adjusting the nodes if needed, that will be separated by them.
  * STEP 4 : Verify the coherence of the linked-list, check syntax errors.
  *
- * TODO: STEP 3 TO 4
+ * TODO: STEP 4
  *
  * @param line the line given by readline
  * @param minishell the general struct of the program
@@ -39,6 +39,8 @@ t_lexer	*lexer(char *line, t_minishell *minishell)
 	if (!list)
 		return (NULL);
 	if (handle_expansion(&list, minishell) == EXIT_FAILURE)
+		return (lex_clear(&list), NULL);
+	if (handle_separators(&list) == EXIT_FAILURE)
 		return (lex_clear(&list), NULL);
 	return (list);
 }
