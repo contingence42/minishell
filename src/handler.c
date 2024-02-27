@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:32:25 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 13:11:00 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:12:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	clean_posthandle(t_lexer **lex, t_executor *exec, t_commands **cmd)
 /**
  * @brief handle the lexing, parsing and execution process
  *
- * TODO:error handling
- *
  * @param line the line given by readline
  * @param minishell the general struct of the program
  */
@@ -69,4 +67,5 @@ void	handler(char *line, t_minishell *minishell)
 	executor->env = &(minishell->env);
 	minishell->code = the_executor(executor, command);
 	clean_posthandle(&lex, executor, &command);
+	lex_clear(&lex);
 }
