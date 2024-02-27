@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 09:30:11 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:57:23 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,14 @@ void	add_lex_quotes(t_lexer **list, char *line, int sepend, int pack[4])
  *
  * @param lst the linked-list to be created
  * @param ln the line given by readline
+ * @param pck three iterators and the error code packed inside an array
  * @return error code, 0 good, 1 malloc err, 2 unclosed quote err
  */
-int	loop_quotes(t_lexer **lst, char *ln)
+int	loop_quotes(t_lexer **lst, char *ln, int pck[4])
 {
 	int		c;
 	int		sepend;
-	int		pck[4];
 
-	pck[0] = -1;
-	pck[1] = 0;
 	while (ln[++pck[0]] && !pck[3])
 	{
 		c = ft_getinset(ln[pck[0]], "'\"");
@@ -110,9 +108,12 @@ t_lexer	*handle_quotes(char *line)
 {
 	t_lexer	*list;
 	int		err;
+	int		pack[4];
 
 	list = NULL;
-	err = loop_quotes(&list, line);
+	ft_bzero(pack, sizeof(int) * 4);
+	pack[0] = -1;
+	err = loop_quotes(&list, line, pack);
 	if (!err && !lex_malloc_check(list))
 		err = 1;
 	lex_trim(&list, &err);
