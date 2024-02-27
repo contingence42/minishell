@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 08:57:51 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:41:03 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 /**
  * @brief update the linked-list to create the needed nodes

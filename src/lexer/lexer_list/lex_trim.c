@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 08:38:03 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 10:11:10 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:42:59 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 static void	lex_delone(t_lexer **list, t_lexer *node)
 {

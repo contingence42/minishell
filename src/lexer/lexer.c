@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:16:42 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 14:34:42 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:41:09 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 /**
  * @brief transform a line into a linked list of revelant elements

@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:06:13 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/01 09:16:08 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:43:04 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 t_lexer	*lex_new(char *content, t_lextype type)
 {

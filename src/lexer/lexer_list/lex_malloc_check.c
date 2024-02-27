@@ -6,11 +6,11 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 13:10:42 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/02 14:40:10 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:43:11 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "lexer.h"
 
 bool	lex_malloc_check(t_lexer *list)
 {

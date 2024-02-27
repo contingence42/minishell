@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:37:43 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 12:51:03 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:46:02 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 
 /**
  * @brief check if the node is a cmd associated type
