@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 14:34:09 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:52:20 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int			malloc_error(void);
 
 bool		lex_malloc_check(t_lexer *list);
 void		lex_clear(t_lexer **list);
+void		lex_trim(t_lexer **list, int *err);
 void		lex_add_back(t_lexer **list, t_lexer *node, int *err);
 void		lex_add_before(t_lexer *list, t_lexer *node);
 void		lex_add_after(t_lexer **list, t_lexer *node, int *err);

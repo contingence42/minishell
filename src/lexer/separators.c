@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:39:50 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 15:07:14 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:58:06 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	handle_separators(t_lexer **list)
 	int	err;
 
 	err = separate(*list);
+	lex_trim(list, &err);
 	if (err)
 		return (malloc_error());
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:15:46 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 15:01:46 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:30:11 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,42 @@ void	add_lex_quotes(t_lexer **list, char *line, int sepend, int pack[4])
 /**
  * @brief iterate over the line and create the linked-list
  *
- * pack[0] = i, standard iterator over string
- * pack[1] = k, initial position of the start of the substr
- * pack[2] = c, separator
- * pack[3] = error flag for malloc error toggled by add_back
+ * pck[0] = i, standard iterator over string
+ * pck[1] = k, initial position of the start of the substr
+ * pck[2] = c, separator
+ * pck[3] = error flag for malloc error toggled by add_back
  *
- * @param list the linked-list to be created
- * @param line the line given by readline
+ * @param lst the linked-list to be created
+ * @param ln the line given by readline
  * @return error code, 0 good, 1 malloc err, 2 unclosed quote err
  */
-int	loop_quotes(t_lexer **list, char *line)
+int	loop_quotes(t_lexer **lst, char *ln)
 {
 	int		c;
 	int		sepend;
-	int		pack[4];
+	int		pck[4];
 
-	pack[0] = -1;
-	pack[1] = 0;
-	while (line[++pack[0]] && !pack[3])
+	pck[0] = -1;
+	pck[1] = 0;
+	while (ln[++pck[0]] && !pck[3])
 	{
-		c = ft_getinset(line[pack[0]], "'\"");
+		c = ft_getinset(ln[pck[0]], "'\"");
 		if (c != -1)
 		{
-			sepend = get_sepend(line + pack[0], c);
+			sepend = get_sepend(ln + pck[0], c);
 			if (sepend == -1)
 				return (2);
-			pack[2] = c;
-			add_lex_quotes(list, line, sepend, pack);
+			pck[2] = c;
+			add_lex_quotes(lst, ln, sepend, pck);
 		}
-		else if (!ft_strchr(line + pack[0], '"')
-			&& !ft_strchr(line + pack[0], '\''))
+		else if (!ft_strchr(ln + pck[0], '"')
+			&& !ft_strchr(ln + pck[0], '\''))
 		{
-			lex_add_back(list, lex_new(ft_strdup(line + pack[0]), UNDEF), &pack[3]);
+			lex_add_back(lst, lex_new(ft_strdup(ln + pck[0]), UNDEF), &pck[3]);
 			break ;
 		}
 	}
-	return (pack[3]);
+	return (pck[3]);
 }
 
 /**
@@ -115,6 +115,7 @@ t_lexer	*handle_quotes(char *line)
 	err = loop_quotes(&list, line);
 	if (!err && !lex_malloc_check(list))
 		err = 1;
+	lex_trim(&list, &err);
 	if (err)
 	{
 		if (err == 1)

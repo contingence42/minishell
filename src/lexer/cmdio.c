@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:12:13 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 14:54:43 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:58:24 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	handle_cmdio(t_lexer **list)
 	int	err;
 
 	err = splitter(*list);
+	lex_trim(list, &err);
 	if (err)
 		return (malloc_error());
 	rename_iofiles(*list);

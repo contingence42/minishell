@@ -28,4 +28,5 @@ SOURCES += ./src/lexer/lexer_list/lex_clear.c
 SOURCES += ./src/lexer/lexer_list/lex_last.c
 SOURCES += ./src/lexer/lexer_list/lex_malloc_check.c
 SOURCES += ./src/lexer/lexer_list/lex_new.c
+SOURCES += ./src/lexer/lexer_list/lex_trim.c
 SOURCES += ./src/lexer/lexer_list/lex_type.c

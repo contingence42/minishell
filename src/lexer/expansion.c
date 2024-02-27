@@ -6,7 +6,7 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:49:33 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/26 14:32:56 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 08:57:51 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int	handle_expansion(t_lexer **list, t_minishell *minishell)
 	err = separate_dollars(*list);
 	if (!err)
 		err = expand(*list, env);
+	lex_trim(list, &err);
 	if (err)
 		return (malloc_error());
 	return (EXIT_SUCCESS);
