@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:12:13 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 08:58:24 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:40:56 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 static void	update_lex(t_lexer *list, char **split, int *err)
 {

@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 09:01:58 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 12:40:39 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:46:09 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parser.h"
 
 /**
  * @brief check if the node is a io associated type

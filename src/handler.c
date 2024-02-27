@@ -6,11 +6,14 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 11:32:25 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 10:12:23 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:49:26 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
+#include "parser.h"
+#include "exec.h"
 
 /**
  * @brief print the required error message and return exit_failure

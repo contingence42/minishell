@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 08:57:20 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 13:09:32 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:49:49 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 
 /**
  * @brief wait for all of the childs and return the latest error code

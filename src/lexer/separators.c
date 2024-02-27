@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:39:50 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 08:58:06 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:41:21 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
 
 /**
  * @brief get the pos of the separator

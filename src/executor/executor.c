@@ -6,11 +6,12 @@
 /*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 10:00:41 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/21 13:10:12 by aattali          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:49:41 by aattali          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 
 /**
  * @brief exit cleanly the execution process and return to the prompt
