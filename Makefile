@@ -6,7 +6,7 @@
 #    By: aattali <aattali@student.42.fr>          +#+  +:+       +#+           #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/22 11:07:12 by aattali           #+#    #+#              #
-#    Updated: 2024/02/26 11:02:20 by aattali          ###   ########.fr        #
+#    Updated: 2024/02/28 17:26:49 by andrew           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ TARGET := minishell
 
 CC := clang
 CFLAGS += -Wall -Werror -Wextra
-LIBRARY_FLAGS := -L/usr/lib -Lmlx -lXext -lX11 -lz -lm -lreadline
+LIBRARY_FLAGS := -L/usr/lib -lz -lm -lreadline
 
 #* ************************************************************************** *#
 #* *                              INCLUDES                                  * *#
@@ -187,7 +187,7 @@ $(OBJECTS): $(OBJDIR)/%.o: %.c
 $(TARGET): $(LIBFT) $(OBJECTS)
 	@echo ""
 	@$(call linking_message)
-	@$(CC) $(CFLAGS) $(INCLUDES_FLAGS) -o $@ $(OBJECTS) $(ALL_LIBS) $(LIBRARY_FLAGS)
+	@$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES_FLAGS) -o $@ $(OBJECTS) $(ALL_LIBS) $(LIBRARY_FLAGS)
 	@echo ""
 	@$(call success_message)
 
