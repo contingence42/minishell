@@ -1,3 +1,4 @@
 -Iincludes
 -Ilibft/includes
+-I/opt/homebrew/opt/readline/include
 -xc
