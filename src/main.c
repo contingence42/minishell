@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aattali <aattali@student.42.fr>          +#+  +:+       +#+          */
+/*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 09:20:21 by aattali          #+#    #+#              */
-/*   Updated: 2024/02/26 11:00:20 by aattali          ###   ########.fr       */
+/*   Created: 2024/01/30 09:20:21 by aattali           #+#    #+#             */
+/*   Updated: 2024/03/14 17:29:07 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/**
+ * @brief the global variable to store the signal code
+ */
+int	g_signal_code = 0;
 
 /**
  * TODO: the function will take the minishell struct, will handle
@@ -24,6 +29,7 @@ void	show_prompt(t_minishell *minishell)
 	i = 0;
 	while (true)
 	{
+		signal_initializer();
 		inpt = readline("minishell$ ");
 		if (ft_strcmp(inpt, "exit") == 0)
 			break ;

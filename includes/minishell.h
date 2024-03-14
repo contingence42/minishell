@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aattali <aattali@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by aattali           #+#    #+#             */
-/*   Updated: 2024/02/27 10:51:16 by aattali          ###   ########.fr       */
+/*   Updated: 2024/03/14 17:28:46 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "libft.h"
 # include "structs.h"
+# include "constants.h"
 
 # include <fcntl.h>
+# include <signal.h>
 # include <errno.h>
 # include <stdio.h>
 # include <readline/history.h>
@@ -46,5 +48,9 @@ t_env	*env_get(t_env *list, char *key);
 char	**env_collapse(t_env *list);
 int		env_add_back(t_env **list, t_env *node);
 void	env_clear(t_env **list);
+
+// signals.c
+void	signal_initializer(void);
+void	signal_handler(int sig);
 
 #endif
