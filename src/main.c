@@ -6,7 +6,7 @@
 /*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by aattali           #+#    #+#             */
-/*   Updated: 2024/03/14 17:29:07 by bmetehri         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:41:20 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	show_prompt(t_minishell *minishell)
 	i = 0;
 	while (true)
 	{
-		signal_initializer();
+		signal_initializer(0, false);
 		inpt = readline("minishell$ ");
 		if (ft_strcmp(inpt, "exit") == 0)
 			break ;

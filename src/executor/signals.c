@@ -6,17 +6,11 @@
 /*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:13:54 by bmetehri          #+#    #+#             */
-/*   Updated: 2024/03/14 17:28:48 by bmetehri         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:07:53 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	signal_initializer(void)
-{
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
-}
 
 void	signal_handler(int sig)
 {
@@ -26,9 +20,24 @@ void	signal_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_signal_code = SIGINT;
 	}
-	else if (sig == SIGQUIT)
+	if (sig == SIGQUIT)
+		g_signal_code = SIGQUIT;
+}
+
+void	signal_initializer(int signal_received, bool its_heredoc)
+{
+	if (its_heredoc && signal_received == SIGINT)
+		signal(SIGINT, heredoc_signal_handler);
+	else
 	{
-		ft_putstr_fd("Quit: 3\n", 1);
+		signal(SIGINT, signal_handler);
+		signal(SIGQUIT, signal_handler);
 	}
+}
+
+void	heredoc_signal_handler(int sig)
+{
+	(void) sig;
 }

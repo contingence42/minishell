@@ -6,7 +6,7 @@
 /*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:43:59 by aattali           #+#    #+#             */
-/*   Updated: 2024/03/14 17:28:46 by bmetehri         ###   ########.fr       */
+/*   Updated: 2024/03/18 14:09:37 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 (wanted `"
 # define CMD_NOT_FOUND "minishell: command not found %s\n"
 
+extern int	g_signal_code;
+
 void	handler(char *line, t_minishell *minishell);
 int		malloc_error(void);
 
@@ -50,7 +52,8 @@ int		env_add_back(t_env **list, t_env *node);
 void	env_clear(t_env **list);
 
 // signals.c
-void	signal_initializer(void);
+void	signal_initializer(int signal_received, bool its_heredoc);
 void	signal_handler(int sig);
+void	heredoc_signal_handler(int sig);
 
 #endif
