@@ -6,7 +6,7 @@
 /*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 09:20:21 by aattali           #+#    #+#             */
-/*   Updated: 2024/03/18 14:41:20 by bmetehri         ###   ########.fr       */
+/*   Updated: 2024/03/21 13:31:17 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	g_signal_code = 0;
 /**
  * TODO: the function will take the minishell struct, will handle
  * the return values and call the general handler when the inpt is valid
+ *
+ *  @remark i did remove the printf("\n"); func in show_prompt
  */
 void	show_prompt(t_minishell *minishell)
 {
@@ -31,6 +33,11 @@ void	show_prompt(t_minishell *minishell)
 	{
 		signal_initializer(0, false);
 		inpt = readline("minishell$ ");
+		if (!inpt)
+		{
+			printf("exit\n");
+			break ;
+		}
 		if (ft_strcmp(inpt, "exit") == 0)
 			break ;
 		if (ft_strcmp(inpt, "history -c") == 0)
@@ -40,7 +47,6 @@ void	show_prompt(t_minishell *minishell)
 			add_history(inpt);
 			handler(inpt, minishell);
 		}
-		printf("\n");
 		++i;
 	}
 	(void)i;
