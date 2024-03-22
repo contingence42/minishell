@@ -6,12 +6,12 @@
 /*   By: bmetehri <bmetehri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 15:10:01 by bmetehri          #+#    #+#             */
-/*   Updated: 2024/03/14 15:17:46 by bmetehri         ###   ########.fr       */
+/*   Updated: 2024/03/22 20:12:15 by bmetehri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONST_H
-# define CONST_H
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
 // Colors
 # define RED "\033[0;31m"
